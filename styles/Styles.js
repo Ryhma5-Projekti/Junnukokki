@@ -24,11 +24,35 @@ export default StyleSheet.create({
         color: '#D2575C',
         paddingBottom: 20,
     },
+    h3: {
+        fontFamily: 'Exo',
+        fontSize: 16,
+        fontWeight: '500',
+        textAlign: 'center',
+        color: '#D2575C',
+        paddingBottom: 20,
+    },
     vali: {
         paddingTop: 40,
     },
     txt: {
         fontSize: 14,
         lineHeight: 20,
+    },
+    CatalogRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 20,
+    },
+    CatalogItem: {
+        flexDirection: 'column',
+        alignContent: 'center',
+    },
+    CatalogImage: {
+        width: 160,
+        height: 160,
+        resizeMode: 'cover',
+        borderRadius: 10,
+        marginBottom: 10,
     },
 });

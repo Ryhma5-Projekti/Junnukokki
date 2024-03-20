@@ -7,7 +7,7 @@ import Recipe from './screens/Recipe';
 import Tips from './screens/Tips';
 import Discover from './screens/Discover';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import { View, SafeAreaView, Image} from 'react-native';
+import { View, SafeAreaView, Image, Text} from 'react-native';
 import Settings from './screens/Settings';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -25,14 +25,14 @@ export default function BottomNavigation() {
                         tabBarStyle: {
                             backgroundColor: '#78B29C',
                             height: 100,
-                            paddingTop: 5,
                         },
                         tabBarLabelStyle: {
                             fontSize: 13,
                             fontFamily: 'Exo',
                             paddingBottom: 25,
                         },
-                        tabBarActiveTintColor: '#D2575C',   // aktiivinen tekstiväri
+                        tabBarActiveBackgroundColor: '#6A9C89',
+                        tabBarActiveTintColor: '#fff',   // aktiivinen tekstiväri
                         tabBarInactiveTintColor: '#fff',    // inaktiivinen tekstiväri
                     }}
                 >
