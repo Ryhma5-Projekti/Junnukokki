@@ -3,6 +3,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import AddNewRecipe from './screens/AddNewRecipe';
+import Recipe from './screens/Recipe';
 import Tips from './screens/Tips';
 import Discover from './screens/Discover';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
@@ -36,7 +37,7 @@ export default function BottomNavigation() {
                     }}
                 >
                     <Tab.Screen
-                        name="Home&Stack"
+                        name="Stack"
                         component={HomeStackScreen}
                         options={{
                             tabBarLabel: 'Reseptit',
@@ -95,6 +96,10 @@ function HomeStackScreen() {
             <HomeStack.Screen
                 name="Settings"
                 component={Settings}
+            />
+            <HomeStack.Screen
+                name="Recipe"
+                component={Recipe}
             />
         </HomeStack.Navigator>
     )

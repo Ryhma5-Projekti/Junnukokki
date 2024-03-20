@@ -16,4 +16,19 @@ export default StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 20,
     },
+    h1: {
+        fontFamily: 'Exo',
+        fontSize: 22,
+        fontWeight: '500',
+        textAlign: 'center',
+        color: '#D2575C',
+        paddingBottom: 20,
+    },
+    vali: {
+        paddingTop: 40,
+    },
+    txt: {
+        fontSize: 14,
+        lineHeight: 20,
+    },
 });
