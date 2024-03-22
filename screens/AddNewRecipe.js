@@ -1,58 +1,72 @@
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { TextInput, View, Text, Button } from "react-native"
-import { storeData, getData } from "../util/LocalStorageUtil"
+import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from "../util/LocalStorageUtil"
+import RecipeForm from "../components/RecipeForm"
+import RecipeSchema from "../data/RecipeSchema.json"
 
 export default AddNewRecipe = () => {
-    const [storeKey, setStoreKey] = useState('')
-    const [storeValue, setStoreValue] = useState('')
+    const [schema, setSchema] = useState({})
+    useEffect(() => {
+        // Create a deep copy
+        setSchema(JSON.parse(JSON.stringify(RecipeSchema)))
+    }, [])
+
     const [storedStatus, setStoredStatus] = useState('-')
-    const [getKey, setGetKey] = useState('')
-    const [getValue, setGetValue] = useState('-')
-
-    const changeStatus = (setValue, boolean) => {
-        setValue(boolean ? "success" : "failed")
-    }
-
     const storeItem = async () => {
-        let result = null
-
+        let result = false
         try {
-            result = await storeData(storeKey, storeValue)
+            await storeData(generateSHA256(schema), JSON.stringify(schema))
+            result = true
         } catch {
             console.error("Error while storing local data")
         }
 
-        changeStatus(setStoredStatus, result !== null)
+        changeStatus(setStoredStatus, result)
+    }
+    const changeStatus = (setValue, boolean) => {
+        setValue(boolean ? "success" : "failed")
     }
 
-    const getItem = async () => {
-        let result = null
-
+    const [allKeys, setAllKeys] = useState([])
+    const inputChange = (fieldName, value) => {
+        setSchema(prevData => ({
+            ...prevData,
+            [fieldName]: value
+        }))
+    }
+    const getKeys = async () => {
+        let keys = []
         try {
-            result = await getData(getKey)
-        } catch {
-            console.error("Error while getting local data")
+            keys = await getAllKeys(); // Wait for the asynchronous getAllKeys function to complete
+        } catch (error) {
+            console.error("Error while fetching keys:", error);
         }
-
-        setGetValue(result ? result : "ERROR!")
-    }
+        setAllKeys(keys);
+    };
 
     return (
         <View>
-            <Text>Key:</Text>
-            <TextInput value={storeKey} onChangeText={text => setStoreKey(text)} />
-
-            <Text>Value:</Text>
-            <TextInput value={storeValue} onChangeText={text => setStoreValue(text)} />
+            <RecipeForm schema={schema} inputChange={inputChange} />
+            {Object.keys(schema).map((field, index) => (
+                <React.Fragment key={index}>
+                    <Text>{field}: {schema[field]}</Text>
+                </React.Fragment>
+            ))}
+            <Text>SHA256: {generateSHA256(schema)}</Text>
 
             <Button title="store" onPress={storeItem} />
             <Text>Last stored status: {storedStatus}</Text>
 
-            <Text>fetch by key:</Text>
-            <TextInput value={getKey} onChangeText={text => setGetKey(text)} />
+            <Text>fetch all keys:</Text>
 
-            <Button title="fetch" onPress={getItem} />
-            <Text>{getValue}</Text>
+            <Button title="fetch" onPress={getKeys} />
+            {allKeys.map((key, index) => (
+                <Text key={index}>
+                    key #{index}: {key}
+                </Text>
+            ))}
+
+            <Button title="remove all" onPress={removeAllKeys} />
         </View>
     )
 }
