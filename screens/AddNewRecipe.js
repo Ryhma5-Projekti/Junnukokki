@@ -15,7 +15,8 @@ export default AddNewRecipe = () => {
     const storeItem = async () => {
         let result = false
         try {
-            await storeData(generateSHA256(schema), JSON.stringify(schema))
+            const converted = convertSchemaToRecipe(schema)
+            await storeData(generateSHA256(converted), JSON.stringify(converted))
             result = true
         } catch {
             console.error("Error while storing local data")
@@ -25,6 +26,11 @@ export default AddNewRecipe = () => {
     }
     const changeStatus = (setValue, boolean) => {
         setValue(boolean ? "success" : "failed")
+    }
+    const convertSchemaToRecipe = (schema) => {
+        return recipe = Object.entries(schema).reduce((acc, [key, item]) => (
+            { ...acc, ...{ [key]: item.multiline ? item.value.split('\n') : item.value } }
+        ), {})
     }
 
     const [allKeys, setAllKeys] = useState([])
