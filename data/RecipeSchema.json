@@ -9,7 +9,7 @@
         "label": "Servings",
         "value": "",
         "multiline": false,
-        "specialStyle": { "borderWidth": 2, "borderColor": "green" }
+        "specialStyle": { "borderWidth": 5, "borderColor": "green" }
     },
     "time": {
         "label": "Time",

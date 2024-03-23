@@ -17,12 +17,16 @@ export default RecipeForm = ({ schema, inputChange }) => {
                     <TextInput value={item.value}
                         onChangeText={text => inputChange(key, text)}
                         multiline={item.multiline}
-                        style={
-                            Object.keys(item.specialStyle).length > 0 ? item.specialStyle :
-                                { borderWidth: 2, borderColor: 'red' }
-                        } />
+                        style={{...epicStyle, ...item.specialStyle}} />
                 </React.Fragment>
             ))}
         </>
     )
+}
+
+/**
+ * @todo Implement proper default styles
+ */
+const epicStyle = {
+    borderWidth: 2
 }
