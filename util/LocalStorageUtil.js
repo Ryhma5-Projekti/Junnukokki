@@ -3,8 +3,9 @@ import CryptoJS from 'crypto-js';
 
 /**
  * Function to generate SHA-256 hash based on key-value pairs of an object
- * @param {{key: value}} obj Object with key-value pairs
- */ 
+ * @param {{key: value}} obj Valid JSON-like object
+ * @returns {String}
+ */
 const generateSHA256 = (obj) => {
     return CryptoJS.SHA256(JSON.stringify(obj)).toString(CryptoJS.enc.Hex);
 }
@@ -12,42 +13,55 @@ const generateSHA256 = (obj) => {
 /**
  * Get data from AsyncStorage
  * @throws Error related to AsyncStorage
+ * @param {String} key Unique identifier
  * @returns {String | null}
  */
 const getData = async (key) => {
     try {
         const jsonValue = await AsyncStorage.getItem(key);
         return jsonValue != null ? JSON.parse(jsonValue) : null;
-    } catch (e) {
-        throw e
+    } catch (error) {
+        console.error(`Error while getting key: ${key}`)
+        throw error
     }
 };
 
 /**
  * Store data into AsyncStorage
+ * @param {String} key Unique identifier
+ * @param {*} value Gets converted with JSON.stringify
  * @throws Error related to AsyncStorage
  */
 const storeData = async (key, value) => {
     try {
         console.log("storing: ", key, value)
-        await AsyncStorage.setItem(key, value);
+
+        await AsyncStorage.setItem(key, JSON.stringify(value));
         await updateKeyList(key);
-    } catch (e) {
-        throw e
+    } catch (error) {
+        console.error(`Error while storing data: '${key}': '${value}'`)
+        throw error
     }
 };
 
+/**
+ * Remove data from AsyncStorage
+ * @param {String} key Unique identifier
+ * @throws Error related to AsyncStorage
+ */
 const removeData = async (key) => {
     try {
         await AsyncStorage.removeItem(key);
         console.log(`Data associated with key '${key}' removed successfully.`);
     } catch (error) {
-        console.error(`Error while removing data with key '${key}':`, error);
+        console.error(`Error while removing data with key: '${key}'`);
+        throw error
     }
 };
 
 /**
  * Remove all keys from storage and keyList
+ * @throws Error related to AsyncStorage
  */
 const removeAllKeys = async () => {
     try {
@@ -57,14 +71,15 @@ const removeAllKeys = async () => {
         })
         removeData('keyList')
     } catch (error) {
-        console.error("Error while removing keys:", error);
+        console.error(`Error while removing keys and key list`);
+        throw error
     }
 }
 
 /**
  * Function to update the list of keys in AsyncStorage
  * @throws Error related to AsyncStorage
- * @param {String} key
+ * @param {String} key Unique identifier
  */
 const updateKeyList = async (key) => {
     try {
@@ -78,7 +93,8 @@ const updateKeyList = async (key) => {
             console.log("Key already exists:", key);
         }
     } catch (error) {
-        console.error("Error while updating key list:", error);
+        console.error(`Error while updating key list with key ${key}`);
+        throw error
     }
 };
 
@@ -94,8 +110,8 @@ const getAllKeys = async () => {
 
         return keyList;
     } catch (error) {
-        console.error("Error while retrieving key list:", error);
-        return [];
+        console.error("Error while retrieving key list");
+        throw error
     }
 };
 

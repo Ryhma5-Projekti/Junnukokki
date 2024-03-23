@@ -16,7 +16,7 @@ export default AddNewRecipe = () => {
         let result = false
         try {
             const converted = convertSchemaToRecipe(schema)
-            await storeData(generateSHA256(converted), JSON.stringify(converted))
+            await storeData(generateSHA256(converted), converted)
             result = true
         } catch {
             console.error("Error while storing local data")
