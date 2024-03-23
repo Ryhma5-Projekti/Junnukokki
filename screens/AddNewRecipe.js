@@ -28,10 +28,13 @@ export default AddNewRecipe = () => {
     }
 
     const [allKeys, setAllKeys] = useState([])
-    const inputChange = (fieldName, value) => {
-        setSchema(prevData => ({
-            ...prevData,
-            [fieldName]: value
+    const inputChange = (key, text) => {
+        setSchema(prevSchema => ({
+            ...prevSchema,
+            [key]: {
+                ...prevSchema[key],
+                value: text
+            }
         }))
     }
     const getKeys = async () => {
@@ -47,11 +50,7 @@ export default AddNewRecipe = () => {
     return (
         <View>
             <RecipeForm schema={schema} inputChange={inputChange} />
-            {Object.keys(schema).map((field, index) => (
-                <React.Fragment key={index}>
-                    <Text>{field}: {schema[field]}</Text>
-                </React.Fragment>
-            ))}
+
             <Text>SHA256: {generateSHA256(schema)}</Text>
 
             <Button title="store" onPress={storeItem} />

@@ -11,11 +11,16 @@ export default RecipeForm = ({ schema, inputChange }) => {
 
     return (
         <>
-            {Object.keys(schema).map((field, index) => (
+            {Object.entries(schema).map(([key, item], index) => (
                 <React.Fragment key={index}>
-                    <Text>{field}:</Text>
-                    <TextInput value={schema[field]}
-                        onChangeText={text => inputChange(field, text)} />
+                    <Text>{item.label}:</Text>
+                    <TextInput value={item.value}
+                        onChangeText={text => inputChange(key, text)}
+                        multiline={item.multiline}
+                        style={
+                            Object.keys(item.specialStyle).length > 0 ? item.specialStyle :
+                                { borderWidth: 2, borderColor: 'red' }
+                        } />
                 </React.Fragment>
             ))}
         </>
