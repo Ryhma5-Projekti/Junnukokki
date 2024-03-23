@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import Fonts from './styles/Fonts';
+import React, { useState, useEffect } from 'react';
+import { Text } from 'react-native';
+import BottomNavigation from './Navigation';
 
 export default function App() {
+  // ladataan fontit käyttöön käynnistyksessä
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadApp = async () => {
+      await Fonts();
+      setFontLoaded(true);
+    };
+    loadApp();
+  }, []);
+
+  if (!fontLoaded) {
+    return <Text>Ladataan sisältöä...</Text>;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <BottomNavigation />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
