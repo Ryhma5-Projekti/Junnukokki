@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
+//import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from "@env";
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -8,9 +9,9 @@ const firebaseConfig = {
     storageBucket: process.env.STORAGE_BUCKET,
     messagingSenderId: process.env.MESSAGING_SENDER_ID,
     appId: process.env.APP_ID
-};
+ };
 
-initializeApp(firebaseConfig);
-const firestore = getFirestore();
-
-export { firestore };
+const firebaseApp = initializeApp(firebaseConfig);
+const firestore = getFirestore(firebaseApp);
+const RECIPES = 'recipes';
+export { firestore, RECIPES, collection };

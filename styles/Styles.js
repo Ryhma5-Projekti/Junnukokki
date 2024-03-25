@@ -55,4 +55,24 @@ export default StyleSheet.create({
         borderRadius: 10,
         marginBottom: 10,
     },
+    
+    //Recipe.js styles
+    RecipeImage: {
+        width: 375,
+        height: 200,
+        resizeMode: 'cover',
+        borderRadius: 10,
+        marginBottom: 10,
+    },
+    RecipeTxt: {
+        fontFamily: 'Exo',
+        fontWeight: '500',
+        textAlign: 'left-justify',
+        paddingBottom: 5,
+        paddingLeft: 10,
+    },
+    RecipeTxtBold: {
+        fontFamily: 'Exo',
+        fontWeight: 'bold'
+    },
 });
