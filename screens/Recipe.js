@@ -28,17 +28,14 @@ const Recipe = ({ route }) => {
         <ScrollView>
             <View style={Styles.container}>
                 <Text style={Styles.h1}>{recipe.name}</Text>
-                <Image
-                    source={require('../components/img.jpeg')}
-                    style={Styles.RecipeImage}
-                />
-                <Text style={Styles.RecipeTxt}>Valmistusaika: <span style={Styles.RecipeTxtBold}>{recipe.time}</span></Text>
-                <Text style={Styles.RecipeTxt}>Annokset: <span style={Styles.RecipeTxtBold}>{recipe.servings}</span></Text>
+                <Image source={require('../components/img.jpeg')} style={Styles.RecipeImage} />
+                <Text style={Styles.RecipeTxt}>Valmistusaika: <Text style={Styles.RecipeTxtBold}>{recipe.time}</Text></Text>
+                <Text style={Styles.RecipeTxt}>Annokset: <Text style={Styles.RecipeTxtBold}>{recipe.servings}</Text></Text>
                 <Text style={[Styles.CatalogRow, Styles.h3]}>Ainekset:</Text>
                 {recipe.ingredients.map((ingredient, index) => (
                     <TouchableOpacity key={index} onPress={() => toggleIngredient(index)}>
                         <Text style={[Styles.RecipeTxt, { textDecorationLine: crossOutIngredients[index] ? 'line-through' : 'none' }]}>
-                            {ingredient}
+                            <Text>{ingredient}</Text>
                         </Text>
                     </TouchableOpacity>
                 ))}
@@ -46,13 +43,17 @@ const Recipe = ({ route }) => {
                 {recipe.instructions.map((instruction, index) => (
                     <TouchableOpacity key={index} onPress={() => toggleInstruction(index)}>
                         <Text style={[Styles.RecipeTxt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
-                           <span style={Styles.h3}>{index + 1}.</span> {instruction}
+                            <Text style={Styles.h3}>{index + 1 + "."}</Text>
+                            <Text>{instruction}</Text>
                         </Text>
                     </TouchableOpacity>
                 ))}
             </View>
         </ScrollView>
     );
+
+
+
 }
 
 export default Recipe;
