@@ -6,7 +6,6 @@ import BottomNavigation from './Navigation';
 export default function App() {
   // ladataan fontit käyttöön käynnistyksessä
   const [fontLoaded, setFontLoaded] = useState(false);
-
   useEffect(() => {
     const loadApp = async () => {
       await Fonts();
