@@ -51,9 +51,6 @@ const Recipe = ({ route }) => {
             </View>
         </ScrollView>
     );
-
-
-
 }
 
 export default Recipe;

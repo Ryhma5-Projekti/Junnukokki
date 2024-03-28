@@ -55,19 +55,56 @@ export default StyleSheet.create({
         borderRadius: 10,
         marginBottom: 10,
     },
-    
-    //Recipe.js styles
-    RecipeImage: {
-        width: 375,
-        height: 200,
+
+    //Discover.js styles
+    DiscoverH3: {
+        fontFamily: 'Exo',
+        fontSize: 20,
+        fontWeight: '500',
+        textAlign: 'center',
+        color: '#D2575C',
+        paddingBottom: 10,
+    },
+    DiscoverRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 10,
+    },
+    DiscoverItem: {
+        flexDirection: 'column',
+        alignContent: 'center',
+    },
+    DiscoverImage: {
+        width: '100%',
+        height: 'auto', 
+        aspectRatio: 1.875,
         resizeMode: 'cover',
         borderRadius: 10,
         marginBottom: 10,
     },
+    // Viiva erottamaan objektit testaamiseen
+    //    DiscoverSeparator: {
+    //    borderBottomWidth: 3,
+    //    borderBottomColor: 'green',
+    //    paddingBottom: 10, 
+    //    marginBottom: 10, 
+    //},
+
+    //Recipe.js styles
+    RecipeImage: {
+        width: '90%',
+        height: 'auto', 
+        aspectRatio: 1.875,
+        resizeMode: 'cover',
+        borderRadius: 10,
+        marginBottom: 10,
+        marginLeft: '5%', 
+        marginRight: '5%',
+    },    
     RecipeTxt: {
         fontFamily: 'Exo',
         fontWeight: '500',
-        textAlign: 'left-justify',
+        textAlign: 'justify',
         paddingBottom: 5,
         paddingLeft: 10,
     },
