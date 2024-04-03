@@ -1,12 +1,69 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { firestore, collection, RECIPES } from '../firebase/Config.js';
+import { query, onSnapshot } from 'firebase/firestore';
+import Styles from '../styles/Styles';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Discover() {
+    const navigation = useNavigation();
+    const [recipes, setRecipes] = useState([])
+
+    useEffect(() => {
+        const q = query(collection(firestore, RECIPES));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const tempRecipes = [];
+            querySnapshot.forEach((doc) => {
+                const recipeObject = {
+                    id: doc.id,
+                    ingredients: doc.data().ingredients,
+                    instructions: doc.data().instructions,
+                    name: doc.data().name,
+                    time: doc.data().time,
+                    servings: doc.data().servings
+                }
+                tempRecipes.push(recipeObject);
+            })
+            setRecipes(tempRecipes);
+        })
+        return () => {
+            unsubscribe();
+        }
+    }, [])
+
+    
+    const handleRecipePress = (recipe) => {
+        navigation.navigate('Recipe', { recipe });
+    }
+    // Viiva objektien väille vaihda: 
+    // <View key={index} style={Styles.container}>     
+    // ->      
+    // <View key={index} style={[Styles.container, index !== 0 && Styles.recipeSeparator]}>
+    // Styles.js -> DiscoverSeparator pois kommentista
     return (
-        <View>
-            <Text>discover</Text>
-            <StatusBar style="auto" />
-        </View>
+        <ScrollView>
+            {recipes.map((recipe, index) => (
+                <View key={index} style={Styles.container}>
+                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
+                        <View>
+                            <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
+                            <View style={Styles.DiscoverRow}>
+                                <View style={Styles.DiscoverItem}>
+                                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
+                                        <Image
+                                            source={require('../components/img.jpeg')}
+                                            style={Styles.DiscoverImage}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            ))}
+        </ScrollView>
     );
+    
 }
