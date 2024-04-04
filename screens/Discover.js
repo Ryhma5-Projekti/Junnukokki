@@ -1,17 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { firestore, collection, RECIPES } from '../firebase/Config.js';
-import { query, onSnapshot } from 'firebase/firestore';
+import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
 import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Discover() {
     const navigation = useNavigation();
     const [recipes, setRecipes] = useState([])
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const q = query(collection(firestore, RECIPES));
+        const q = query(
+            collection(firestore, RECIPES),
+            orderBy('name'),
+            limit(20)
+        );
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const tempRecipes = [];
@@ -42,9 +47,20 @@ export default function Discover() {
     // ->      
     // <View key={index} style={[Styles.container, index !== 0 && Styles.recipeSeparator]}>
     // Styles.js -> DiscoverSeparator pois kommentista
+
+    const filteredRecipes = recipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
     return (
         <ScrollView>
-            {recipes.map((recipe, index) => (
+            <TextInput
+                style={Styles.searchBar}
+                placeholder='Etsi reseptejä'
+                onChangeText={(text) => setSearchQuery(text)}
+                value={searchQuery}
+            />
+            {filteredRecipes.map((recipe, index) => (
                 <View key={index} style={Styles.container}>
                     <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
                         <View>
