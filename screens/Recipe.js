@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Styles from '../styles/Styles';
 import { ScrollView } from 'react-native-gesture-handler';
+import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
 const Recipe = ({ route }) => {
     const { recipe } = route.params;
@@ -26,30 +27,64 @@ const Recipe = ({ route }) => {
     // Kuva placeholderina
     return (
         <ScrollView>
-            <View style={Styles.container}>
-                <Text style={Styles.h1}>{recipe.name}</Text>
+            <View style={Styles.containerFullWidth}>
                 <Image source={require('../components/img.jpeg')} style={Styles.RecipeImage} />
-                <Text style={Styles.RecipeTxt}>Valmistusaika: <Text style={Styles.RecipeTxtBold}>{recipe.time}</Text></Text>
-                <Text style={Styles.RecipeTxt}>Annokset: <Text style={Styles.RecipeTxtBold}>{recipe.servings}</Text></Text>
-                <Text style={[Styles.CatalogRow, Styles.h3]}>Ainekset:</Text>
-                {recipe.ingredients.map((ingredient, index) => (
-                    <TouchableOpacity key={index} onPress={() => toggleIngredient(index)}>
-                        <Text style={[Styles.RecipeTxt, { textDecorationLine: crossOutIngredients[index] ? 'line-through' : 'none' }]}>
-                            <Text>{ingredient}</Text>
-                        </Text>
-                    </TouchableOpacity>
-                ))}
-                <Text style={[Styles.CatalogRow, Styles.h3]}>Ohje:</Text>
-                {recipe.instructions.map((instruction, index) => (
-                    <TouchableOpacity key={index} onPress={() => toggleInstruction(index)}>
-                        <Text style={[Styles.RecipeTxt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
-                            <Text style={Styles.h3}>{index + 1 + "."}</Text>
-                            <Text>{instruction}</Text>
-                        </Text>
-                    </TouchableOpacity>
-                ))}
+
+                <View style={Styles.containerRecipe}>
+                    <Text style={Styles.h1}>{recipe.name}</Text>
+
+                    <View style={Styles.RecipeInfo}>
+
+                        <Text style={Styles.RecipeInfoTxt}>
+                            <AntDesign name="clockcircle" style={Styles.RecipeIcon} />
+                            &nbsp;&nbsp; {recipe.time}</Text>
+
+                        <Text style={Styles.RecipeInfoTxt}>
+                            <FontAwesome name="group" style={Styles.RecipeIcon} />
+                            &nbsp;&nbsp; {recipe.servings}</Text>
+
+                    </View>
+
+                    <View style={Styles.hr} />
+
+                    <Text style={Styles.RecipeH2}>
+                        <FontAwesome5 name="carrot" style={Styles.RecipeIcon} />
+                        &nbsp;&nbsp; Ainekset</Text>
+
+                        <View style={{marginHorizontal: 10}}>
+
+                    {recipe.ingredients.map((ingredient, index) => (
+                        <TouchableOpacity key={index} onPress={() => toggleIngredient(index)}>
+                            <Text style={[Styles.RecipeIngredients, {
+                                textDecorationLine: crossOutIngredients[index] ? 'line-through' : 'none',
+                                backgroundColor: index % 2 === 0 ? 'white' : 'transparent',
+                            }]}>
+                                <Text>{ingredient}</Text>
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
+                    </View>
+
+                    <Text style={[Styles.vali, Styles.RecipeH2]}>
+                        <FontAwesome name="file-text" style={Styles.RecipeIcon} />
+                        &nbsp;&nbsp; Ohjeet</Text>
+                    <View style={Styles.RecipeInstruction}>
+                        {recipe.instructions.map((instruction, index) => (
+                            <TouchableOpacity key={index} onPress={() => toggleInstruction(index)}>
+                                <View style={Styles.RecipeInstRow}>
+                                    <View style={Styles.numberContainer}>
+                                        <Text style={Styles.RecipeH3}>{index + 1 + "."}</Text>
+                                </View>
+                                <View style={Styles.textContainer}>
+                                    <Text style={[Styles.txt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
+                                        <Text>{instruction}</Text></Text>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    ))}</View>
             </View>
-        </ScrollView>
+        </View>
+        </ScrollView >
     );
 }
 
