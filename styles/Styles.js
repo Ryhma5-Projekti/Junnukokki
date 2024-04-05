@@ -39,6 +39,12 @@ export default StyleSheet.create({
         fontSize: 14,
         lineHeight: 20,
     },
+    hr: {
+        borderBottomColor: 'lightgrey',
+        borderBottomWidth: 1,
+        marginVertical: 10,
+        paddingTop: 20,
+    },
     CatalogRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -76,7 +82,7 @@ export default StyleSheet.create({
     },
     DiscoverImage: {
         width: '100%',
-        height: 'auto', 
+        height: 'auto',
         aspectRatio: 1.875,
         resizeMode: 'cover',
         borderRadius: 10,
@@ -91,26 +97,77 @@ export default StyleSheet.create({
     //},
 
     //Recipe.js styles
+    containerRecipe: {
+        // reseptin tekstien sisällölle
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#FAF5F1',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 40,
+        paddingVertical: 30,
+        marginTop: -30,
+        borderRadius: 30,
+    },
     RecipeImage: {
-        width: '90%',
-        height: 'auto', 
+        width: '100%',
+        height: 'auto',
         aspectRatio: 1.875,
         resizeMode: 'cover',
-        borderRadius: 10,
-        marginBottom: 10,
-        marginLeft: '5%', 
-        marginRight: '5%',
-    },    
-    RecipeTxt: {
+    },
+    RecipeInfoTxt: {
         fontFamily: 'Exo',
+        fontSize: 14,
+        paddingLeft: 30,
+    },
+    RecipeInfo: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent: 'center',
+        width: '100%',
+        paddingVertical: 10,
+        marginLeft: -30,
+    },
+    RecipeIcon: {
+        color: '#78B29C',
+        fontSize: 18,
+    },
+    RecipeH2: {
+        fontFamily: 'Exo',
+        fontSize: 18,
         fontWeight: '500',
-        textAlign: 'justify',
-        paddingBottom: 5,
+        textAlign: 'left',
+        color: '#D2575C',
+        paddingVertical: 20,
+    },
+    RecipeIngredients: {
+        fontSize: 14,
+        paddingVertical: 10,
         paddingLeft: 10,
     },
-    RecipeTxtBold: {
-        fontFamily: 'Exo',
-        fontWeight: 'bold'
+    RecipeInstruction: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        borderColor: '#e4e4e4',
+        borderWidth: 1,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+    },
+    RecipeInstRow: {
+        flexDirection: 'row',
+        paddingVertical: 10,
+        width: '100%',
+        height: 'auto',
+    },
+    numberContainer: {
+        marginRight: 10,
+    },
+    textContainer: {
+        flex: 1,
+    },
+    RecipeH3: {
+            fontFamily: 'Exo',
+            fontSize: 14,
+            color: '#D2575C',
     },
     searchBar: {
         height: 40,
