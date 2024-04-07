@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import AddNewRecipe from './screens/AddNewRecipe';
 import Recipe from './screens/Recipe';
+import OpenTips from './screens/OpenTips';
 import Tips from './screens/Tips';
 import Discover from './screens/Discover';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
@@ -100,6 +101,10 @@ function HomeStackScreen() {
             <HomeStack.Screen
                 name="Recipe"
                 component={Recipe}
+            />
+             <HomeStack.Screen
+                name="OpenTips"
+                component={OpenTips}
             />
         </HomeStack.Navigator>
     )
