@@ -140,6 +140,20 @@ export default StyleSheet.create({
         color: '#D2575C',
         paddingVertical: 20,
     },
+    RecipeH3: {
+        fontFamily: 'Exo',
+        fontSize: 15,
+        color: 'black',
+        textAlign: 'left',
+    },
+    RecipeH3Space: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: 20,
+        paddingBottom: 10,
+        paddingLeft: 5,
+        color: 'black',
+    },
     RecipeIngredients: {
         fontSize: 14,
         paddingVertical: 10,
@@ -164,11 +178,6 @@ export default StyleSheet.create({
     },
     textContainer: {
         flex: 1,
-    },
-    RecipeH3: {
-            fontFamily: 'Exo',
-            fontSize: 14,
-            color: '#D2575C',
     },
     searchBar: {
         height: 50,
