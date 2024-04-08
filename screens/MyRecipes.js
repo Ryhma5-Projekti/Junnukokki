@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'reac
 import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from "../util/LocalStorageUtil"
 import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
+import RecipeList from '../components/RecipeList';
+import RecipeSearch from '../components/RecipeSearch';
 
 export default function MyRecipes() {
     const navigation = useNavigation()
@@ -45,33 +47,8 @@ export default function MyRecipes() {
 
     return (
         <View>
-            <Text>omat reseptit</Text>
-
-            <TextInput
-                style={Styles.searchBar}
-                placeholder='Etsi reseptejä'
-                onChangeText={(text) => setSearchQuery(text)}
-                value={searchQuery}
-            />
-            {filteredRecipes.map((recipe, index) => (
-                <View key={index} style={Styles.container}>
-                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
-                        <View>
-                            <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
-                            <View style={Styles.DiscoverRow}>
-                                <View style={Styles.DiscoverItem}>
-                                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
-                                        <Image
-                                            source={require('../components/img.jpeg')}
-                                            style={Styles.DiscoverImage}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            ))}
+            <RecipeSearch setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
+            <RecipeList filteredRecipes={filteredRecipes} handleRecipePress={handleRecipePress} />
         </View>
     );
 }
