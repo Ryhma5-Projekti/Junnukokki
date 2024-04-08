@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import Styles from '../styles/Styles';
 
-export default RecipeList = ({filteredRecipes, handleRecipePress}) => {
+export default RecipeList = ({ filteredRecipes, handleRecipePress }) => {
 
     return (
         <>

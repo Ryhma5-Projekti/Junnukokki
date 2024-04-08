@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { View, Text, TextInput } from "react-native"
+import React from "react"
+import { Text, TextInput } from "react-native"
 
 /**
  * 
@@ -17,7 +17,7 @@ export default RecipeForm = ({ schema, inputChange }) => {
                     <TextInput value={item.value}
                         onChangeText={text => inputChange(key, text)}
                         multiline={item.multiline}
-                        style={{...epicStyle, ...item.specialStyle}} />
+                        style={{ ...epicStyle, ...item.specialStyle }} />
                 </React.Fragment>
             ))}
         </>

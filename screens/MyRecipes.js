@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
-import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from "../util/LocalStorageUtil"
-import Styles from '../styles/Styles';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
+import { getData, getAllKeys } from "../util/LocalStorageUtil"
 import RecipeList from '../components/RecipeList';
 import RecipeSearch from '../components/RecipeSearch';
 import useRecipes from '../hooks/useRecipes';

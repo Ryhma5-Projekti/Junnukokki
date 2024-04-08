@@ -1,10 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import React, { useEffect } from 'react';
+import { ScrollView } from 'react-native';
 import { firestore, collection, RECIPES } from '../firebase/Config.js';
-import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
-import Styles from '../styles/Styles';
-import { useNavigation } from '@react-navigation/native';
+import { query, onSnapshot, orderBy, limit } from 'firebase/firestore';
 import RecipeList from '../components/RecipeList';
 import RecipeSearch from '../components/RecipeSearch';
 import useRecipes from '../hooks/useRecipes.js';
@@ -45,5 +42,5 @@ export default function Discover() {
             <RecipeList filteredRecipes={filteredRecipes} handleRecipePress={handleRecipePress} />
         </ScrollView>
     );
-    
+
 }

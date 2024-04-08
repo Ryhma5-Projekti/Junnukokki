@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { TextInput } from 'react-native';
 import Styles from '../styles/Styles';
 
-export default RecipeSearch = ({setSearchQuery, searchQuery}) => {
+export default RecipeSearch = ({ setSearchQuery, searchQuery }) => {
 
     return (
         <>
