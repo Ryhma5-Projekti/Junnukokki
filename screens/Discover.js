@@ -5,6 +5,7 @@ import { firestore, collection, RECIPES } from '../firebase/Config.js';
 import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
 import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
+import { FlatList } from 'react-native';
 
 export default function Discover() {
     const navigation = useNavigation();
@@ -52,33 +53,40 @@ export default function Discover() {
         recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
 
+        const renderRecipeItem = ({ item }) => (
+            <TouchableOpacity onPress={() => handleRecipePress(item)}>
+                <View style={Styles.DiscoverItem}>
+                    <Image
+                        source={require('../components/img.jpeg')}
+                        style={Styles.CatalogImage}
+                    />
+                    <Text style={[Styles.DiscoverH3, Styles.maxWidth]}>{item.name}</Text>
+                </View>
+            </TouchableOpacity>
+        );
+
     return (
         <ScrollView>
+            <View style={Styles.container}>
             <TextInput
                 style={Styles.searchBar}
                 placeholder='Etsi reseptejä'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />
-            {filteredRecipes.map((recipe, index) => (
-                <View key={index} style={Styles.container}>
-                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
-                        <View>
-                            <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
-                            <View style={Styles.DiscoverRow}>
-                                <View style={Styles.DiscoverItem}>
-                                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
-                                        <Image
-                                            source={require('../components/img.jpeg')}
-                                            style={Styles.DiscoverImage}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            ))}
+            <Text style={[Styles.h1, Styles.vali]}>Löydä uusia reseptejä</Text>
+
+            <FlatList
+                    data={filteredRecipes}
+                    renderItem={renderRecipeItem}
+                    keyExtractor={(item) => item.id}
+                    numColumns={2}
+                    nestedScrollEnabled={true}
+                    scrollEnabled={false}
+                    contentContainerStyle={{}}
+                />
+
+            </View>
         </ScrollView>
     );
     
