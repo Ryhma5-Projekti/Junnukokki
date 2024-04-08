@@ -5,11 +5,12 @@ import { firestore, collection, RECIPES } from '../firebase/Config.js';
 import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
 import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
+import RecipeList from '../components/RecipeList';
+import RecipeSearch from '../components/RecipeSearch';
+import useRecipes from '../hooks/useRecipes.js';
 
 export default function Discover() {
-    const navigation = useNavigation();
-    const [recipes, setRecipes] = useState([])
-    const [searchQuery, setSearchQuery] = useState('');
+    const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
 
     useEffect(() => {
         const q = query(
@@ -38,47 +39,10 @@ export default function Discover() {
         }
     }, [])
 
-    
-    const handleRecipePress = (recipe) => {
-        navigation.navigate('Recipe', { recipe });
-    }
-    // Viiva objektien väille vaihda: 
-    // <View key={index} style={Styles.container}>     
-    // ->      
-    // <View key={index} style={[Styles.container, index !== 0 && Styles.recipeSeparator]}>
-    // Styles.js -> DiscoverSeparator pois kommentista
-
-    const filteredRecipes = recipes.filter((recipe) =>
-        recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-
     return (
         <ScrollView>
-            <TextInput
-                style={Styles.searchBar}
-                placeholder='Etsi reseptejä'
-                onChangeText={(text) => setSearchQuery(text)}
-                value={searchQuery}
-            />
-            {filteredRecipes.map((recipe, index) => (
-                <View key={index} style={Styles.container}>
-                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
-                        <View>
-                            <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
-                            <View style={Styles.DiscoverRow}>
-                                <View style={Styles.DiscoverItem}>
-                                    <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
-                                        <Image
-                                            source={require('../components/img.jpeg')}
-                                            style={Styles.DiscoverImage}
-                                        />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            ))}
+            <RecipeSearch setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
+            <RecipeList filteredRecipes={filteredRecipes} handleRecipePress={handleRecipePress} />
         </ScrollView>
     );
     

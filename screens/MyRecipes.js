@@ -5,16 +5,11 @@ import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
 import RecipeList from '../components/RecipeList';
 import RecipeSearch from '../components/RecipeSearch';
+import useRecipes from '../hooks/useRecipes';
 
 export default function MyRecipes() {
-    const navigation = useNavigation()
-    const [recipes, setRecipes] = useState([])
-    const [searchQuery, setSearchQuery] = useState('');
-    const filteredRecipes = recipes.filter((recipe) =>
-        recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
 
-    const [allRecipes, setAllRecipes] = useState([])
     useEffect(() => {
         (async () => {
             setRecipes(await getAllLocalRecipes())
@@ -39,10 +34,6 @@ export default function MyRecipes() {
         } catch (error) {
             console.error("Error while fetching keys:", error)
         }
-    }
-
-    const handleRecipePress = (recipe) => {
-        navigation.navigate('Recipe', { recipe });
     }
 
     return (
