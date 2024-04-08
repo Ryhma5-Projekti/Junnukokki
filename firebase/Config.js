@@ -14,4 +14,5 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const firestore = getFirestore(firebaseApp);
 const RECIPES = 'recipes';
-export { firestore, RECIPES, collection };
+const DISCOVER = 'discover';
+export { firestore, RECIPES, DISCOVER, collection };
