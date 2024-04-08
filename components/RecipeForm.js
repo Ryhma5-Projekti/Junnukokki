@@ -13,7 +13,6 @@ export default RecipeForm = ({ schema, inputChange }) => {
 
     return (
         <ScrollView>
-            <View style={Styles.container}>
                 <Text style={Styles.h1}>Luo uusi resepti</Text>
                 {Object.entries(schema).map(([key, item], index) => (
                     <React.Fragment key={index}>
@@ -27,7 +26,6 @@ export default RecipeForm = ({ schema, inputChange }) => {
                             style={Styles.RecipeInstruction} />
                     </React.Fragment>
                 ))}
-            </View>
         </ScrollView>
     )
 }

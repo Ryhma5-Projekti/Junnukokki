@@ -187,4 +187,32 @@ export default StyleSheet.create({
         borderRadius: 30,
         paddingHorizontal: 20,
     },
+    buttonAdd: {
+        backgroundColor: '#78B29C',
+        borderRadius: 30,
+        padding: 10,
+        marginVertical: 10,
+        width: '70%',
+        alignSelf: 'center',
+    },
+    buttonDelete: {
+        borderColor: '#D2575C',
+        borderWidth: 1,
+        borderRadius: 30,
+        padding: 10,
+        marginVertical: 10,
+        width: '70%',
+        alignSelf: 'center',
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        paddingVertical: 5,
+    },
+    buttonTextDelete: {
+        color: '#D2575C',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+    },
 });

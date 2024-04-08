@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
-import { TextInput, View, Text, Button, ScrollView } from "react-native"
+import { TextInput, View, Text, Button, ScrollView, Pressable } from "react-native"
 import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from "../util/LocalStorageUtil"
 import RecipeForm from "../components/RecipeForm"
 import RecipeSchema from "../data/RecipeSchema.json"
+import Styles from "../styles/Styles"
 
 export default AddNewRecipe = () => {
     const [schema, setSchema] = useState({})
@@ -66,23 +67,28 @@ export default AddNewRecipe = () => {
 
     return (
         <ScrollView>
+            <View style={Styles.container}>
             <RecipeForm schema={schema} inputChange={inputChange} />
 
             <Text>SHA256: {generateSHA256(schema)}</Text>
 
-            <Button title="store" onPress={storeItem} />
+            <Pressable onPress={storeItem} style={Styles.buttonAdd}>
+                <Text style={Styles.buttonText}>Lisää resepti</Text></Pressable>
             <Text>Last stored status: {storedStatus}</Text>
 
             <Text>fetch all local recipes:</Text>
 
-            <Button title="fetch" onPress={getAllLocalRecipes} />
+            <Pressable onPress={getAllLocalRecipes} style={Styles.buttonAdd}>
+                <Text style={Styles.buttonText}>Fetch all</Text></Pressable>
             {allRecipes.map((item, index) => (
-                <Text key={index} style={{ borderWidth: 2, padding: 5 }}>
+                <Text key={index}>
                     recipe #{index}: {JSON.stringify(item)}
                 </Text>
             ))}
 
-            <Button title="remove all" onPress={removeAllKeys} />
+            <Pressable onPress={removeAllKeys} style={Styles.buttonDelete}>
+                <Text style={Styles.buttonTextDelete}>Remove all keys</Text></Pressable>
+            </View>
         </ScrollView>
     )
 }
