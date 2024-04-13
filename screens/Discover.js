@@ -27,7 +27,8 @@ export default function Discover() {
                     instructions: doc.data().instructions,
                     name: doc.data().name,
                     time: doc.data().time,
-                    servings: doc.data().servings
+                    servings: doc.data().servings,
+                    image: doc.data().image
                 }
                 tempRecipes.push(recipeObject);
             })
@@ -42,15 +43,10 @@ export default function Discover() {
     const handleRecipePress = (recipe) => {
         navigation.navigate('Recipe', { recipe });
     }
-    // Viiva objektien väille vaihda: 
-    // <View key={index} style={Styles.container}>     
-    // ->      
-    // <View key={index} style={[Styles.container, index !== 0 && Styles.recipeSeparator]}>
-    // Styles.js -> DiscoverSeparator pois kommentista
-
+    
     const filteredRecipes = recipes.filter((recipe) =>
         recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+    );
 
     return (
         <ScrollView>
@@ -65,11 +61,13 @@ export default function Discover() {
                     <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
                         <View>
                             <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
+                            
                             <View style={Styles.DiscoverRow}>
                                 <View style={Styles.DiscoverItem}>
                                     <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
+                                        {/* Vaihdettu Image-komponentin source */}
                                         <Image
-                                            source={require('../components/img.jpeg')}
+                                            source={{ uri: recipe.image }}
                                             style={Styles.DiscoverImage}
                                         />
                                     </TouchableOpacity>
