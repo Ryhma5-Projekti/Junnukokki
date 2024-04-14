@@ -21,10 +21,20 @@ const OpenTips = ({ route }) => {
     return (
         <ScrollView>
             <View style={Styles.containerFullWidth}>
-                <Image source={require('../components/img.jpeg')} style={Styles.RecipeImage} />
+
+                <Image source={{ uri: discover.image }} style={Styles.RecipeImage} />
+
 
                 <View style={Styles.containerRecipe}>
                     <Text style={Styles.h1}>{discover.title}</Text>
+
+
+                    <View style={Styles.hr} />
+
+                    <Text style={Styles.RecipeH2}>
+                        <FontAwesome5 name="carrot" style={Styles.RecipeIcon} />
+                        &nbsp;&nbsp; Ohjeet</Text>
+
 
                         <View style={{marginHorizontal: 10}}>
                     </View>
@@ -49,4 +59,6 @@ const OpenTips = ({ route }) => {
     );
 }
 
+
 export default OpenTips;
+

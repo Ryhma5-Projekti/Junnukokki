@@ -24,7 +24,10 @@ export default function Tips() {
                 const discoverObject = {
                     id: doc.id,
                     instructions: doc.data().instructions,
-                    title: doc.data().title
+
+                    title: doc.data().title,
+                    image: doc.data().image
+
                 }
                 tempDiscovers.push(discoverObject);
             })
@@ -51,13 +54,16 @@ export default function Tips() {
 
     return (
         <ScrollView>
+
             <View style={Styles.container}>
+
             <TextInput
                 style={Styles.searchBar}
                 placeholder='Etsi vinkkejä'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />
+
             <Text style={[Styles.h1, Styles.vali]}>Inspiraatiota ja vinkkejä</Text>
             {filteredDiscovers.map((discover, index) => (
                 <View key={index}>
@@ -66,7 +72,7 @@ export default function Tips() {
                                     <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
                                         <View style={Styles.TipsImageContainer}>
                                         <Image
-                                            source={require('../components/img2.jpg')}
+                                            source={{ uri: discover.image }}
                                             style={Styles.TipsImage}
                                         /></View>
                                     </TouchableOpacity>
@@ -76,6 +82,7 @@ export default function Tips() {
                 </View>
             ))}
             </View>
+
         </ScrollView>
     );
     

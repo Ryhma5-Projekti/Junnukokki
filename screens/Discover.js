@@ -28,7 +28,8 @@ export default function Discover() {
                     instructions: doc.data().instructions,
                     name: doc.data().name,
                     time: doc.data().time,
-                    servings: doc.data().servings
+                    servings: doc.data().servings,
+                    image: doc.data().image
                 }
                 tempRecipes.push(recipeObject);
             })
@@ -43,21 +44,16 @@ export default function Discover() {
     const handleRecipePress = (recipe) => {
         navigation.navigate('Recipe', { recipe });
     }
-    // Viiva objektien väille vaihda: 
-    // <View key={index} style={Styles.container}>     
-    // ->      
-    // <View key={index} style={[Styles.container, index !== 0 && Styles.recipeSeparator]}>
-    // Styles.js -> DiscoverSeparator pois kommentista
-
+    
     const filteredRecipes = recipes.filter((recipe) =>
         recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+    );
 
         const renderRecipeItem = ({ item }) => (
             <TouchableOpacity onPress={() => handleRecipePress(item)}>
                 <View style={Styles.DiscoverItem}>
                     <Image
-                        source={require('../components/img.jpeg')}
+                        source={{ uri: item.image }}
                         style={Styles.CatalogImage}
                     />
                     <Text style={[Styles.DiscoverH3, Styles.maxWidth]}>{item.name}</Text>
@@ -74,6 +70,8 @@ export default function Discover() {
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />
+
+
             <Text style={[Styles.h1, Styles.vali]}>Löydä uusia reseptejä</Text>
 
             <FlatList
@@ -87,6 +85,7 @@ export default function Discover() {
                 />
 
             </View>
+
         </ScrollView>
     );
     

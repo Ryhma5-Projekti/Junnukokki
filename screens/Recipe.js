@@ -28,8 +28,9 @@ const Recipe = ({ route }) => {
     return (
         <ScrollView>
             <View style={Styles.containerFullWidth}>
-                <Image source={require('../components/img.jpeg')} style={Styles.RecipeImage} />
 
+            <Image style={Styles.DiscoverImage} source={{ uri: recipe.image }}/>
+        
                 <View style={Styles.containerRecipe}>
                     <Text style={Styles.h1}>{recipe.name}</Text>
 
