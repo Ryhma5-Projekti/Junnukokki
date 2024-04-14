@@ -28,6 +28,7 @@ const Recipe = ({ route }) => {
     return (
         <ScrollView>
             <View style={Styles.containerFullWidth}>
+
             <Image style={Styles.DiscoverImage} source={{ uri: recipe.image }}/>
         
                 <View style={Styles.containerRecipe}>

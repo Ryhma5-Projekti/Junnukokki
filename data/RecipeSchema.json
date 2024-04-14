@@ -1,31 +1,47 @@
 {
     "name": {
-        "label": "Name",
+        "label": "Reseptin nimi",
         "value": "",
         "multiline": false,
         "specialStyle": {}
     },
     "servings": {
-        "label": "Servings",
+        "label": "Annosmäärä",
         "value": "",
+        "icon": "group",
+        "iconSet": "FontAwesome",
+        "iconSize": 16,
+        "iconColor": "#78B29C",
         "multiline": false,
-        "specialStyle": { "borderWidth": 5, "borderColor": "green" }
+        "specialStyle": {}
     },
     "time": {
-        "label": "Time",
+        "label": "Valmistusaika",
         "value": "",
+        "icon": "clockcircle",
+        "iconSet": "AntDesign",
+        "iconSize": 14,
+        "iconColor": "#78B29C",
         "multiline": false,
         "specialStyle": {}
     },
     "ingredients": {
-        "label": "Ingredients",
+        "label": "Ainekset",
         "value": "",
+        "icon": "carrot",
+        "iconSet": "FontAwesome5",
+        "iconSize": 18,
+        "iconColor": "#78B29C",
         "multiline": true,
         "specialStyle": {}
     },
     "instructions": {
-        "label": "Instructions",
+        "label": "Ohjeet",
         "value": "",
+        "icon": "file-text",
+        "iconSet": "FontAwesome",
+        "iconSize": 16,
+        "iconColor": "#78B29C",
         "multiline": true,
         "specialStyle": {}
     }

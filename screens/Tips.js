@@ -24,8 +24,10 @@ export default function Tips() {
                 const discoverObject = {
                     id: doc.id,
                     instructions: doc.data().instructions,
+
                     title: doc.data().title,
                     image: doc.data().image
+
                 }
                 tempDiscovers.push(discoverObject);
             })
@@ -52,31 +54,35 @@ export default function Tips() {
 
     return (
         <ScrollView>
+
+            <View style={Styles.container}>
+
             <TextInput
                 style={Styles.searchBar}
                 placeholder='Etsi vinkkejä'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />
+
+            <Text style={[Styles.h1, Styles.vali]}>Inspiraatiota ja vinkkejä</Text>
             {filteredDiscovers.map((discover, index) => (
-                <View key={index} style={Styles.container}>
+                <View key={index}>
                     <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
                         <View>
-                            <Text style={Styles.DiscoverH3}>{discover.title}</Text>
-                            <View style={Styles.DiscoverRow}>
-                                <View style={Styles.DiscoverItem}>
                                     <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
+                                        <View style={Styles.TipsImageContainer}>
                                         <Image
                                             source={{ uri: discover.image }}
-                                            style={Styles.DiscoverImage}
-                                        />
+                                            style={Styles.TipsImage}
+                                        /></View>
                                     </TouchableOpacity>
+                                    <Text style={Styles.DiscoverH3}>{discover.title}</Text>
                                 </View>
-                            </View>
-                        </View>
                     </TouchableOpacity>
                 </View>
             ))}
+            </View>
+
         </ScrollView>
     );
     
