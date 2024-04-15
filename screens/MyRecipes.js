@@ -9,12 +9,13 @@ import RemoveRecipeModal from '../components/RemoveRecipeModal';
 
 export default function MyRecipes() {
     const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
+    const [forceRecipeUpdate, setForceRecipeUpdate] = useState(false);
 
     useEffect(() => {
         (async () => {
             setRecipes(await getAllLocalRecipes())
         })()
-    }, [])
+    }, [forceRecipeUpdate])
 
     const getAllLocalRecipes = async () => {
         const recipes = []
@@ -41,7 +42,7 @@ export default function MyRecipes() {
 
     const toggleModal = ({ forceState } = {}) => {
         if (forceState !== undefined) {
-            console.log("isnt null")
+            setForceRecipeUpdate(prevState => !prevState)
         }
         setModalVisible(forceState == undefined ? !modalVisible : forceState)
     };
