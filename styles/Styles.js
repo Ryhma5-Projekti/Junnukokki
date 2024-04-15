@@ -34,6 +34,7 @@ export default StyleSheet.create({
     },
     vali: {
         paddingTop: 40,
+        marginBottom: 10,
     },
     txt: {
         fontSize: 14,
@@ -60,33 +61,33 @@ export default StyleSheet.create({
         resizeMode: 'cover',
         borderRadius: 10,
         marginBottom: 10,
+        marginHorizontal: 10,
     },
 
-    //Discover.js styles
+    //Discover.js + Tips.js styles
     DiscoverH3: {
         fontFamily: 'Exo',
-        fontSize: 20,
-        fontWeight: '500',
+        fontSize: 16,
         textAlign: 'center',
         color: '#D2575C',
-        paddingBottom: 10,
+        paddingBottom: 30,
     },
-    DiscoverRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: 10,
+    TipsImageContainer: {
+        widdth: '100%',
+        height: 130,
+        overflow: 'hidden',
     },
-    DiscoverItem: {
-        flexDirection: 'column',
-        alignContent: 'center',
-    },
-    DiscoverImage: {
-        width: '100%',
-        height: 'auto',
-        aspectRatio: 1.875,
+    TipsImage: {
+        flex: 1,
+        width: undefined,
+        height: undefined,
         resizeMode: 'cover',
-        borderRadius: 10,
+        borderRadius: 30,
         marginBottom: 10,
+    },
+    maxWidth: {
+        alignSelf: 'center',
+        maxWidth: 160,
     },
     // Viiva erottamaan objektit testaamiseen
     //    DiscoverSeparator: {
@@ -139,6 +140,20 @@ export default StyleSheet.create({
         color: '#D2575C',
         paddingVertical: 20,
     },
+    RecipeH3: {
+        fontFamily: 'Exo',
+        fontSize: 15,
+        color: 'black',
+        textAlign: 'left',
+    },
+    RecipeH3Space: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: 20,
+        paddingBottom: 10,
+        paddingLeft: 5,
+        color: 'black',
+    },
     RecipeIngredients: {
         fontSize: 14,
         paddingVertical: 10,
@@ -164,17 +179,40 @@ export default StyleSheet.create({
     textContainer: {
         flex: 1,
     },
-    RecipeH3: {
-            fontFamily: 'Exo',
-            fontSize: 14,
-            color: '#D2575C',
-    },
     searchBar: {
-        height: 40,
-        borderColor: 'gray',
+        height: 50,
+        borderColor: '#949494',
+        backgroundColor: 'white',
         borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        margin: 10,
+        borderRadius: 30,
+        paddingHorizontal: 20,
+    },
+    buttonAdd: {
+        backgroundColor: '#78B29C',
+        borderRadius: 30,
+        padding: 10,
+        marginVertical: 10,
+        width: '70%',
+        alignSelf: 'center',
+    },
+    buttonDelete: {
+        borderColor: '#D2575C',
+        borderWidth: 1,
+        borderRadius: 30,
+        padding: 10,
+        marginVertical: 10,
+        width: '70%',
+        alignSelf: 'center',
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        paddingVertical: 5,
+    },
+    buttonTextDelete: {
+        color: '#D2575C',
+        textAlign: 'center',
+        textTransform: 'uppercase',
     },
 });
