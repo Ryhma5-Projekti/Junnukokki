@@ -6,9 +6,13 @@ import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/f
 import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
 
+import { useTheme } from '../styles/ThemeContext';
+
 export default function Tips() {
     const navigation = useNavigation();
-    const [discovers, setDiscovers] = useState([])
+    const { selectedTheme } = useTheme(); 
+
+    const [discovers, setDiscovers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -24,10 +28,7 @@ export default function Tips() {
                 const discoverObject = {
                     id: doc.id,
                     instructions: doc.data().instructions,
-
-                    title: doc.data().title,
-                    image: doc.data().image
-
+                    title: doc.data().title
                 }
                 tempDiscovers.push(discoverObject);
             })
@@ -47,43 +48,38 @@ export default function Tips() {
     // ->      
     // <View key={index} style={[Styles.container, index !== 0 && Styles.recipeSeparator]}>
     // Styles.js -> DiscoverSeparator pois kommentista
-
     const filteredDiscovers = discovers.filter((discover) =>
-        discover.title.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+    discover.title.toLowerCase().includes(searchQuery.toLowerCase())
+);
 
-    return (
-        <ScrollView style={Styles.scrollview}>
-
-            <View style={Styles.container}>
-
-            <TextInput
-                style={Styles.searchBar}
-                placeholder='Etsi vinkkejä'
-                onChangeText={(text) => setSearchQuery(text)}
-                value={searchQuery}
-            />
-
-            <Text style={[Styles.h1, Styles.vali]}>Inspiraatiota ja vinkkejä</Text>
-            {filteredDiscovers.map((discover, index) => (
-                <View key={index}>
-                    <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
-                        <View>
-                                    <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
-                                        <View style={Styles.TipsImageContainer}>
-                                        <Image
-                                            source={{ uri: discover.image }}
-                                            style={Styles.TipsImage}
-                                        /></View>
-                                    </TouchableOpacity>
-                                    <Text style={Styles.DiscoverH3}>{discover.title}</Text>
-                                </View>
-                    </TouchableOpacity>
-                </View>
-            ))}
+return (
+<ScrollView>
+    <View style={selectedTheme.container}>
+        <TextInput
+            style={selectedTheme.searchBar}
+            placeholder='Etsi vinkkejä'
+            onChangeText={(text) => setSearchQuery(text)}
+            value={searchQuery}
+        />
+        <Text style={[selectedTheme.h1, selectedTheme.vali]}>Inspiraatiota ja vinkkejä</Text>
+        {filteredDiscovers.map((discover, index) => (
+            <View key={index}>
+                <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
+                    <View>
+                        <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
+                            <View style={selectedTheme.TipsImageContainer}>
+                                <Image
+                                    source={require('../components/img2.jpg')}
+                                    style={selectedTheme.TipsImage}
+                                />
+                            </View>
+                        </TouchableOpacity>
+                        <Text style={selectedTheme.DiscoverH3}>{discover.title}</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-
-        </ScrollView>
-    );
-    
+        ))}
+    </View>
+</ScrollView>
+);
 }
