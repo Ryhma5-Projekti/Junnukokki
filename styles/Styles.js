@@ -242,4 +242,9 @@ export default StyleSheet.create({
         textAlign: 'center',
         textTransform: 'uppercase',
     },
+    buttonNotification: {
+        textAlign: 'center',
+        fontSize: 14,
+        color: 'gray',
+    },
 });

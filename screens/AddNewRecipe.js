@@ -12,7 +12,7 @@ export default AddNewRecipe = () => {
         setSchema(JSON.parse(JSON.stringify(RecipeSchema)))
     }, [])
 
-    const [storedStatus, setStoredStatus] = useState('-')
+    const [storedStatus, setStoredStatus] = useState(' ')
     const storeItem = async () => {
         let result = false
         try {
@@ -26,7 +26,7 @@ export default AddNewRecipe = () => {
         changeStatus(setStoredStatus, result)
     }
     const changeStatus = (setValue, boolean) => {
-        setValue(boolean ? "success" : "failed")
+        setValue(boolean ? "Reseptin lisäys onnistui" : "Reseptiä ei lisätty")
     }
     const convertSchemaToRecipe = (schema) => {
         return recipe = Object.entries(schema).reduce((acc, [key, item]) => (
@@ -74,6 +74,7 @@ export default AddNewRecipe = () => {
             <Pressable onPress={storeItem} style={Styles.buttonAdd}>
                 <Text style={Styles.buttonText}>Lisää resepti</Text></Pressable>
                 </View>
+                <Text style={Styles.buttonNotification}>{storedStatus}</Text>
             </View>
         </ScrollView>
     )
