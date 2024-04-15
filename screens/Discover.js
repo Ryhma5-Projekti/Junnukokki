@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import React, { useEffect } from 'react';
+import { ScrollView } from 'react-native';
 import { firestore, collection, RECIPES } from '../firebase/Config.js';
 import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
 import Styles from '../styles/Styles';
@@ -8,9 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
 
 export default function Discover() {
-    const navigation = useNavigation();
-    const [recipes, setRecipes] = useState([])
-    const [searchQuery, setSearchQuery] = useState('');
+    const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
 
     useEffect(() => {
         const q = query(
@@ -39,7 +36,6 @@ export default function Discover() {
             unsubscribe();
         }
     }, [])
-
     
     const handleRecipePress = (recipe) => {
         navigation.navigate('Recipe', { recipe });
@@ -85,8 +81,7 @@ export default function Discover() {
                 />
 
             </View>
-
         </ScrollView>
     );
-    
+
 }
