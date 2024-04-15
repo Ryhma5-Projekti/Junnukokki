@@ -10,7 +10,6 @@ import { useForceUpdate } from '../hooks/ForceUpdateProvider';
 
 export default function MyRecipes() {
     const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
-    // const [forceRecipeUpdate, setForceRecipeUpdate] = useState(false);
     const { forceUpdate } = useForceUpdate();
 
     useEffect(() => {
@@ -43,14 +42,10 @@ export default function MyRecipes() {
     const [selectedRecipe, setSelectedRecipe] = useState({})
 
     const toggleModal = ({ forceState } = {}) => {
-        if (forceState !== undefined) {
-            // setForceRecipeUpdate(prevState => !prevState)
-        }
         setModalVisible(forceState === undefined ? !modalVisible : forceState)
     };
 
     const onLongPress = (recipe) => {
-        console.log("LONG PRESSED!")
         setSelectedRecipe(recipe)
         toggleModal()
     }

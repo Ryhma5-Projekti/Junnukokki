@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Text, View, Pressable } from 'react-native';
 import Styles from '../styles/Styles';
-import { generateSHA256, getData, removeData } from '../util/LocalStorageUtil';
+import { generateSHA256, removeData } from '../util/LocalStorageUtil';
 import { useForceUpdate } from '../hooks/ForceUpdateProvider';
 
 export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
