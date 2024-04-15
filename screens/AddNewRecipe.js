@@ -4,6 +4,7 @@ import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from ".
 import RecipeForm from "../components/RecipeForm"
 import RecipeSchema from "../data/RecipeSchema.json"
 import Styles from "../styles/Styles"
+import { useForceUpdate } from "../hooks/ForceUpdateProvider"
 
 export default AddNewRecipe = () => {
     const [schema, setSchema] = useState({})
@@ -13,6 +14,7 @@ export default AddNewRecipe = () => {
     }, [])
 
     const [storedStatus, setStoredStatus] = useState(' ')
+    const { setForceUpdate } = useForceUpdate();
     const storeItem = async () => {
         let result = false
         try {
@@ -23,6 +25,7 @@ export default AddNewRecipe = () => {
             console.error("Error while storing local data")
         }
 
+        result && setForceUpdate(prevState => !prevState);
         changeStatus(setStoredStatus, result)
     }
     const changeStatus = (setValue, boolean) => {

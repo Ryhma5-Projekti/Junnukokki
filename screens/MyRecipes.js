@@ -6,16 +6,18 @@ import RecipeSearch from '../components/RecipeSearch';
 import useRecipes from '../hooks/useRecipes';
 import Styles from '../styles/Styles';
 import RemoveRecipeModal from '../components/RemoveRecipeModal';
+import { useForceUpdate } from '../hooks/ForceUpdateProvider';
 
 export default function MyRecipes() {
     const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
-    const [forceRecipeUpdate, setForceRecipeUpdate] = useState(false);
+    // const [forceRecipeUpdate, setForceRecipeUpdate] = useState(false);
+    const { forceUpdate } = useForceUpdate();
 
     useEffect(() => {
         (async () => {
             setRecipes(await getAllLocalRecipes())
         })()
-    }, [forceRecipeUpdate])
+    }, [forceUpdate])
 
     const getAllLocalRecipes = async () => {
         const recipes = []
@@ -25,7 +27,7 @@ export default function MyRecipes() {
             // Convert null/undefined/singleton into an array
             keys = !keys ? [] :
                 !Array.isArray(keys) ? keys = [keys] : keys
-            
+
             for (const key of keys) {
                 const recipe = await getData(key);
                 recipe && recipes.push(recipe)
@@ -42,9 +44,9 @@ export default function MyRecipes() {
 
     const toggleModal = ({ forceState } = {}) => {
         if (forceState !== undefined) {
-            setForceRecipeUpdate(prevState => !prevState)
+            // setForceRecipeUpdate(prevState => !prevState)
         }
-        setModalVisible(forceState == undefined ? !modalVisible : forceState)
+        setModalVisible(forceState === undefined ? !modalVisible : forceState)
     };
 
     const onLongPress = (recipe) => {
