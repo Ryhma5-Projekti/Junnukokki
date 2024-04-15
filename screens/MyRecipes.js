@@ -39,8 +39,11 @@ export default function MyRecipes() {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedRecipe, setSelectedRecipe] = useState({})
 
-    const toggleModal = () => {
-        setModalVisible(!modalVisible)
+    const toggleModal = ({ forceState } = {}) => {
+        if (forceState !== undefined) {
+            console.log("isnt null")
+        }
+        setModalVisible(forceState == undefined ? !modalVisible : forceState)
     };
 
     const onLongPress = (recipe) => {

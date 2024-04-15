@@ -1,8 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Text, View, Pressable } from 'react-native';
 import Styles from '../styles/Styles';
+import { removeData } from '../util/LocalStorageUtil';
 
 export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
+    const [shutdownInitiated, setShutdownInitiated] = useState(false);
+    useEffect(() => {
+        setShutdownInitiated(false)
+    }, [modalVisible])
+
+    const shutdownCountdown = () => {
+        if (!shutdownInitiated) {
+            setShutdownInitiated(true)
+            setTimeout(() => {
+                toggleModal({ forceState: false })
+            }, 3000)
+        }
+    }
+
+    const removeRecipe = async () => {
+        await removeData(JSON.stringify(recipe))
+        shutdownCountdown()
+    }
 
     return (
         <Modal
@@ -18,7 +37,7 @@ export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
                 </Text>
 
                 <Pressable style={Styles.buttonDelete}
-                    onPress={toggleModal}>
+                    onPress={removeRecipe}>
                     <Text style={Styles.buttonTextDelete}>Poista Resepti</Text>
                 </Pressable>
 
