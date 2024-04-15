@@ -27,6 +27,14 @@ export default StyleSheet.create({
         color: '#D2575C',
         paddingBottom: 20,
     },
+    h2: {
+        fontFamily: 'Exo',
+        fontSize: 19,
+        fontWeight: '500',
+        textAlign: 'center',
+        color: '#D2575C',
+        paddingBottom: 20,
+    },
     h3: {
         fontFamily: 'Exo',
         fontSize: 16,

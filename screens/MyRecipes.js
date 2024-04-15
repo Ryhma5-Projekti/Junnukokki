@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import { getData, getAllKeys } from "../util/LocalStorageUtil"
 import RecipeList from '../components/RecipeList';
 import RecipeSearch from '../components/RecipeSearch';
 import useRecipes from '../hooks/useRecipes';
 import Styles from '../styles/Styles';
+import RemoveRecipeModal from '../components/RemoveRecipeModal';
 
 export default function MyRecipes() {
     const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
@@ -35,10 +36,29 @@ export default function MyRecipes() {
         }
     }
 
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedRecipe, setSelectedRecipe] = useState({})
+
+    const toggleModal = () => {
+        setModalVisible(!modalVisible)
+    };
+
+    const onLongPress = (recipe) => {
+        console.log("LONG PRESSED!")
+        setSelectedRecipe(recipe)
+        toggleModal()
+    }
+
     return (
         <View style={Styles.vali}>
+            <RemoveRecipeModal toggleModal={toggleModal}
+                modalVisible={modalVisible}
+                recipe={selectedRecipe} />
+
             <RecipeSearch setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
-            <RecipeList filteredRecipes={filteredRecipes} handleRecipePress={handleRecipePress} />
+            <RecipeList filteredRecipes={filteredRecipes}
+                handleRecipePress={handleRecipePress}
+                onLongPress={onLongPress} />
         </View>
     );
 }
