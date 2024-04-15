@@ -28,27 +28,33 @@ export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
 
     return (
         <Modal
-            style={{ marginTop: 22 } + Styles.containerFullWidth}
             animationType="slide"
             transparent={true}
             visible={modalVisible}
             onRequestClose={toggleModal}
         >
-            <View style={{ marginTop: 22, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-                <Text style={Styles.h2}>
-                    Halutako poistaa reseptin '{recipe && recipe.name}' pysyvästi?
-                </Text>
+            <View style={Styles.DimmingCover}>
+                <View style={Styles.Modal}>
+                    <Text style={Styles.h2}>
+                        Halutako poistaa reseptin{' '}
+                        '{recipe && <Text style={{ fontStyle: 'italic' }}>{recipe.name}</Text>}'
+                        {' '}pysyvästi?
+                    </Text>
 
-                <Pressable style={Styles.buttonDelete}
-                    onPress={removeRecipe}>
-                    <Text style={Styles.buttonTextDelete}>Poista Resepti</Text>
-                </Pressable>
+                    <View style={{flexDirection: 'row'}}>
+                        <Pressable style={[Styles.buttonDelete, Styles.SideBySideButton]}
+                            onPress={removeRecipe}>
+                            <Text style={Styles.buttonTextDelete}>Poista Resepti</Text>
+                        </Pressable>
 
-                <Pressable style={Styles.buttonAdd}
-                    onPress={toggleModal}>
-                    <Text style={Styles.buttonText}>Peruuta</Text>
-                </Pressable>
+                        <Pressable style={[Styles.buttonAdd, Styles.SideBySideButton]}
+                            onPress={toggleModal}>
+                            <Text style={Styles.buttonText}>Peruuta</Text>
+                        </Pressable>
+                    </View>
+                </View>
             </View>
+
         </Modal>
     )
 }
