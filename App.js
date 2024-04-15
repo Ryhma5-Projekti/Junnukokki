@@ -1,7 +1,10 @@
-import Fonts from './styles/Fonts';
 import React, { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import BottomNavigation from './Navigation';
+import { ThemeProvider } from './styles/ThemeContext'; 
+import Fonts from './styles/Fonts';
+
+
 
 export default function App() {
   // ladataan fontit käyttöön käynnistyksessä
@@ -19,8 +22,8 @@ export default function App() {
   }
 
   return (
-    <>
+    <ThemeProvider> 
       <BottomNavigation />
-    </>
+    </ThemeProvider>
   );
 }
