@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Text, View, Pressable } from 'react-native';
 import Styles from '../styles/Styles';
-import { removeData } from '../util/LocalStorageUtil';
+import { generateSHA256, getData, removeData } from '../util/LocalStorageUtil';
 
 export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
     const [shutdownInitiated, setShutdownInitiated] = useState(false);
@@ -19,7 +19,7 @@ export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
     }
 
     const removeRecipe = async () => {
-        await removeData(JSON.stringify(recipe))
+        await removeData(generateSHA256(recipe))
         shutdownCountdown()
     }
 

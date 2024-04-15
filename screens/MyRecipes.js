@@ -24,10 +24,10 @@ export default function MyRecipes() {
             // Convert null/undefined/singleton into an array
             keys = !keys ? [] :
                 !Array.isArray(keys) ? keys = [keys] : keys
-
+            
             for (const key of keys) {
                 const recipe = await getData(key);
-                recipes.push(recipe);
+                recipe && recipes.push(recipe)
             }
 
             return recipes
