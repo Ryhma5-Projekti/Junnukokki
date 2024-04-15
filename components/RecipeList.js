@@ -4,24 +4,23 @@ import Styles from '../styles/Styles';
 export default RecipeList = ({ filteredRecipes, handleRecipePress }) => {
 
     return (
-        <>
+        <View style={Styles.vali}>
+            <Text style={Styles.h1}>Omat reseptini</Text>
             {filteredRecipes.map((recipe, index) => (
-                <View key={index} style={Styles.container}>
+                <View key={index}>
                     <TouchableOpacity onPress={() => handleRecipePress(recipe)}>
                         <View>
-                            <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
                             <View style={Styles.DiscoverRow}>
-                                <View style={Styles.DiscoverItem}>
                                     <Image
-                                        source={require('../components/img.jpeg')}
-                                        style={Styles.DiscoverImage}
+                                        source={require('../components/myrecipes.png')}
+                                        style={Styles.MyRecipesImage}
                                     />
-                                </View>
+                                    <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
                 </View>
             ))}
-        </>
+        </View>
     )
 }

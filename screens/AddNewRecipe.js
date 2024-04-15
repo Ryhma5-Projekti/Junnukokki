@@ -70,24 +70,10 @@ export default AddNewRecipe = () => {
             <View style={Styles.container}>
             <RecipeForm schema={schema} inputChange={inputChange} />
 
-            <Text>SHA256: {generateSHA256(schema)}</Text>
-
+        <View style={Styles.vali}>
             <Pressable onPress={storeItem} style={Styles.buttonAdd}>
                 <Text style={Styles.buttonText}>Lisää resepti</Text></Pressable>
-            <Text>Last stored status: {storedStatus}</Text>
-
-            <Text>fetch all local recipes:</Text>
-
-            <Pressable onPress={getAllLocalRecipes} style={Styles.buttonAdd}>
-                <Text style={Styles.buttonText}>Fetch all</Text></Pressable>
-            {allRecipes.map((item, index) => (
-                <Text key={index}>
-                    recipe #{index}: {JSON.stringify(item)}
-                </Text>
-            ))}
-
-            <Pressable onPress={removeAllKeys} style={Styles.buttonDelete}>
-                <Text style={Styles.buttonTextDelete}>Remove all keys</Text></Pressable>
+                </View>
             </View>
         </ScrollView>
     )

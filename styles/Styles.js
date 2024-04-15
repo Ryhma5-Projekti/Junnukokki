@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+    scrollview: {
+        backgroundColor: '#FAF5F1',
+    },
     containerFullWidth: {
         // tätä käytetään, kun halutaan sisällön menevän reunasta reunaan
         flex: 1,
@@ -32,6 +35,14 @@ export default StyleSheet.create({
         color: '#D2575C',
         paddingBottom: 20,
     },
+    h4: {
+        fontFamily: 'Exo',
+        fontSize: 14,
+        textAlign: 'center',
+        color: 'white',
+        lineHeight: 20,
+        paddingVertical: 10,
+    },
     vali: {
         paddingTop: 40,
         marginBottom: 10,
@@ -45,6 +56,12 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         marginVertical: 10,
         paddingTop: 20,
+    },
+    WhiteBox: {
+        backgroundColor: '#78b29c',
+        borderRadius: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     },
     CatalogRow: {
         flexDirection: 'row',
@@ -73,7 +90,7 @@ export default StyleSheet.create({
         paddingBottom: 30,
     },
     TipsImageContainer: {
-        widdth: '100%',
+        width: '100%',
         height: 130,
         overflow: 'hidden',
     },
@@ -88,6 +105,16 @@ export default StyleSheet.create({
     maxWidth: {
         alignSelf: 'center',
         maxWidth: 160,
+    },
+    // MyRecipes.js styles
+    MyRecipesImage: {
+        width: '100%',
+        height: 90,
+        resizeMode: 'cover',
+        borderRadius: 30,
+        marginBottom: 10,
+        marginHorizontal: 10,
+        alignSelf: 'center',
     },
     // Viiva erottamaan objektit testaamiseen
     //    DiscoverSeparator: {

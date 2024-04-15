@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { getData, getAllKeys } from "../util/LocalStorageUtil"
 import RecipeList from '../components/RecipeList';
 import RecipeSearch from '../components/RecipeSearch';
 import useRecipes from '../hooks/useRecipes';
+import Styles from '../styles/Styles';
 
 export default function MyRecipes() {
     const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
@@ -35,7 +36,7 @@ export default function MyRecipes() {
     }
 
     return (
-        <View>
+        <View style={Styles.vali}>
             <RecipeSearch setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
             <RecipeList filteredRecipes={filteredRecipes} handleRecipePress={handleRecipePress} />
         </View>

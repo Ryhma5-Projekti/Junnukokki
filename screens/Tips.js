@@ -53,7 +53,7 @@ export default function Tips() {
         );
 
     return (
-        <ScrollView>
+        <ScrollView style={Styles.scrollview}>
 
             <View style={Styles.container}>
 

@@ -1,6 +1,6 @@
 import Fonts from './styles/Fonts';
 import React, { useState, useEffect } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import BottomNavigation from './Navigation';
 
 export default function App() {

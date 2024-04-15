@@ -62,7 +62,7 @@ export default function Discover() {
         );
 
     return (
-        <ScrollView>
+        <ScrollView style={Styles.scrollview}>
             <View style={Styles.container}>
             <TextInput
                 style={Styles.searchBar}
