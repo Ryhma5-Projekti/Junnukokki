@@ -112,7 +112,7 @@ export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
                             onPress={startCountdown}>
                             <Text style={Styles.buttonTextDelete}>
                                 {countdown == CD_INITIAL ? 'Poista' :
-                                    countdown != CD_TRIGGER ? `Kumoa (${countdown})` : "Poistettu!"}
+                                    countdown > CD_TRIGGER ? `Kumoa (${countdown})` : "Poistettu!"}
                             </Text>
                         </Pressable>
 
