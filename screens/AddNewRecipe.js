@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { TextInput, View, Text, Button, ScrollView, Pressable } from "react-native"
-import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from "../util/LocalStorageUtil"
+import { View, Text, ScrollView, Pressable } from "react-native"
+import { storeData, generateSHA256 } from "../util/LocalStorageUtil"
 import RecipeForm from "../components/RecipeForm"
 import RecipeSchema from "../data/RecipeSchema.json"
 
 import { useTheme } from '../styles/ThemeContext';
+import { useForceUpdate } from "../hooks/ForceUpdateProvider"
 
 export default AddNewRecipe = () => {
     const { selectedTheme, toggleTheme } = useTheme();
@@ -16,6 +17,7 @@ export default AddNewRecipe = () => {
     }, [])
 
     const [storedStatus, setStoredStatus] = useState(' ')
+    const { setForceUpdate } = useForceUpdate();
     const storeItem = async () => {
         let result = false
         try {
@@ -26,6 +28,7 @@ export default AddNewRecipe = () => {
             console.error("Error while storing local data")
         }
 
+        result && setForceUpdate(prevState => !prevState);
         changeStatus(setStoredStatus, result)
     }
     const changeStatus = (setValue, boolean) => {
@@ -35,27 +38,6 @@ export default AddNewRecipe = () => {
         return recipe = Object.entries(schema).reduce((acc, [key, item]) => (
             { ...acc, ...{ [key]: item.multiline ? item.value.split('\n') : item.value } }
         ), {})
-    }
-
-    const [allRecipes, setAllRecipes] = useState([])
-    const getAllLocalRecipes = async () => {
-        const recipes = []
-        try {
-            let keys = await getAllKeys()
-
-            // Convert null/undefined/singleton into an array
-            keys = !keys ? [] :
-                !Array.isArray(keys) ? keys = [keys] : keys
-
-            for (const key of keys) {
-                const recipe = await getData(key);
-                recipes.push(recipe);
-            }
-
-            setAllRecipes(recipes)
-        } catch (error) {
-            console.error("Error while fetching keys:", error)
-        }
     }
 
     const inputChange = (key, text) => {

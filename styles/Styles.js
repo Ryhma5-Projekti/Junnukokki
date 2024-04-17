@@ -36,6 +36,14 @@ export const lightTheme = StyleSheet.create({
         color: '#D2575C',
         paddingBottom: 20,
     },
+    h2: {
+        fontFamily: 'Exo',
+        fontSize: 19,
+        fontWeight: '500',
+        textAlign: 'center',
+        color: '#D2575C',
+        paddingBottom: 20,
+    },
     h3: {
         fontFamily: 'Exo',
         fontSize: 16,
@@ -248,6 +256,25 @@ export const lightTheme = StyleSheet.create({
         textAlign: 'center',
         fontSize: 14,
         color: 'gray',
+    },
+    DimmingCover: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    Modal: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        paddingVertical: 20,
+        paddingHorizontal: 30,
+        marginHorizontal: 10,
+    },
+    SideBySideButton: {
+        flex: 1,
+        maxWidth: '50%',
+        padding: 10,
+        margin: 5,
     },
 });
 

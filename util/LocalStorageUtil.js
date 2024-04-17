@@ -52,6 +52,7 @@ const storeData = async (key, value) => {
 const removeData = async (key) => {
     try {
         await AsyncStorage.removeItem(key);
+        await updateKeyListOnRemoval(key)
         console.log(`Data associated with key '${key}' removed successfully.`);
     } catch (error) {
         console.error(`Error while removing data with key: '${key}'`);
@@ -77,7 +78,29 @@ const removeAllKeys = async () => {
 }
 
 /**
- * Function to update the list of keys in AsyncStorage
+ * Function to update the list of keys in AsyncStorage when removing a key
+ * @throws Error related to AsyncStorage
+ * @param {String} key Unique identifier
+ */
+const updateKeyListOnRemoval = async (key) => {
+    try {
+        const keyListJSON = await AsyncStorage.getItem('keyList');
+        const keyList = keyListJSON ? JSON.parse(keyListJSON) : [];
+
+        if (keyList.includes(key)) {
+            keyList.filter(item => item !== key)
+            await AsyncStorage.setItem('keyList', JSON.stringify(keyList));
+        } else {
+            console.log("Key doesn't exists in key list:", key);
+        }
+    } catch (error) {
+        console.error(`Error while removing key ${key} from key list`);
+        throw error
+    }
+}
+
+/**
+ * Function to update the list of keys in AsyncStorage when adding a key
  * @throws Error related to AsyncStorage
  * @param {String} key Unique identifier
  */

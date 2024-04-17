@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text } from 'react-native';
 import BottomNavigation from './Navigation';
+import { ForceUpdateProvider } from './hooks/ForceUpdateProvider';
 import { ThemeProvider } from './styles/ThemeContext'; 
 import Fonts from './styles/Fonts';
 
@@ -22,8 +23,10 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider> 
+    <ForceUpdateProvider>
+      <ThemeProvider> 
       <BottomNavigation />
     </ThemeProvider>
+    </ForceUpdateProvider>
   );
 }
