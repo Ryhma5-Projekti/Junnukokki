@@ -1,32 +1,25 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { lightTheme, darkTheme, colorblindTheme } from './NewStyles';
+import { getAdditionalStyle } from './NewStyles';
 
 // Create a context
 const ThemeContext = createContext();
 
 // Create a provider component
 export const ThemeProvider = ({ children }) => {
-    const [selectedTheme, setSelectedTheme] = useState(lightTheme);
+    const [selectedTheme, setSelectedTheme] = useState(getAdditionalStyle());
 
     useEffect(() => {
         (async () => {
             const savedThemeName = await AsyncStorage.getItem('themeName');
-            setSelectedTheme(themesByIdentifier[savedThemeName || 'default']);
+            setSelectedTheme(getAdditionalStyle(savedThemeName));
         })()
     }, []);
 
-    const themesByIdentifier = {
-        'default': lightTheme,
-        'light': lightTheme,
-        'dark': darkTheme,
-        'colorblind': colorblindTheme,
-    }
-
     const toggleTheme = async (themeName) => {
-        setSelectedTheme(themesByIdentifier[themeName || 'default']);
+        setSelectedTheme(getAdditionalStyle(themeName));
         await AsyncStorage.setItem('themeName', themeName); // Persist theme selection
-    }; 
+    };
 
     return (
         <ThemeContext.Provider value={{ selectedTheme, toggleTheme }}>
