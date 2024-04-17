@@ -2,12 +2,24 @@ import { StyleSheet } from 'react-native';
 
 export const lightTheme = StyleSheet.create({
     // Vaalean teeman tyylit
+    scrollview: {
+        backgroundColor: '#FAF5F1',
+    },   
     containerFullWidth: {
         flex: 1,
         backgroundColor: '#FAF5F1',
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+    headerStyle: {
+        backgroundColor: '#FAF5F1',
+    },
+    bottomNavigationStyle: {
+        backgroundColor: '#78B29C',
+    },
+    tabBarActiveBackgroundColor: '#6A9C89',
+    settingsColor: '#78B29C',
+
     container: {
         // normaalille sisällölle
         flex: 1,
@@ -31,6 +43,14 @@ export const lightTheme = StyleSheet.create({
         textAlign: 'center',
         color: '#D2575C',
         paddingBottom: 20,
+        },
+    h4: {
+        fontFamily: 'Exo',
+        fontSize: 14,
+        textAlign: 'center',
+        color: 'white',
+        lineHeight: 20,
+        paddingVertical: 10,
     },
     vali: {
         paddingTop: 40,
@@ -45,6 +65,12 @@ export const lightTheme = StyleSheet.create({
         borderBottomWidth: 1,
         marginVertical: 10,
         paddingTop: 20,
+    },
+    WhiteBox: {
+        backgroundColor: '#78b29c',
+        borderRadius: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     },
     CatalogRow: {
         flexDirection: 'row',
@@ -89,13 +115,16 @@ export const lightTheme = StyleSheet.create({
         alignSelf: 'center',
         maxWidth: 160,
     },
-    // Viiva erottamaan objektit testaamiseen
-    //    DiscoverSeparator: {
-    //    borderBottomWidth: 3,
-    //    borderBottomColor: 'green',
-    //    paddingBottom: 10, 
-    //    marginBottom: 10, 
-    //},
+    // MyRecipes.js styles
+    MyRecipesImage: {
+        width: '100%',
+        height: 90,
+        resizeMode: 'cover',
+        borderRadius: 30,
+        marginBottom: 10,
+        marginHorizontal: 10,
+        alignSelf: 'center',
+    },
 
     //Recipe.js styles
     containerRecipe: {
@@ -214,18 +243,35 @@ export const lightTheme = StyleSheet.create({
         color: '#D2575C',
         textAlign: 'center',
         textTransform: 'uppercase',
+    },
+    buttonNotification: {
+        textAlign: 'center',
+        fontSize: 14,
+        color: 'gray',
     },
 });
 
 //TUMMA TEEMA ALKAA TÄSTÄ
 export const darkTheme = StyleSheet.create({
     // Tumman teeman tyylit
+    scrollview: {
+        backgroundColor: '#2b2b2b',
+    },
     containerFullWidth: {
         flex: 1,
         backgroundColor: '#2b2b2b', // tummanharmaa
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+    headerStyle: {
+        backgroundColor: '#2b2b2b',
+    },
+    bottomNavigationStyle: {
+        backgroundColor: '#78B29C', 
+    },
+    tabBarActiveBackgroundColor: '#6A9C89',
+    settingsColor: '#78B29C',
+
     container: {
         // normaalille sisällölle
         flex: 1,
@@ -250,6 +296,14 @@ export const darkTheme = StyleSheet.create({
         color: '#D2575C',
         paddingBottom: 20,
     },
+    h4: {
+        fontFamily: 'Exo',
+        fontSize: 14,
+        textAlign: 'center',
+        color: 'white',
+        lineHeight: 20,
+        paddingVertical: 10,
+    },
     vali: {
         paddingTop: 40,
         marginBottom: 10,
@@ -264,6 +318,12 @@ export const darkTheme = StyleSheet.create({
         borderBottomWidth: 1,
         marginVertical: 10,
         paddingTop: 20,
+    },
+    WhiteBox: {
+        backgroundColor: '#78b29c',
+        borderRadius: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     },
     CatalogRow: {
         flexDirection: 'row',
@@ -308,14 +368,16 @@ export const darkTheme = StyleSheet.create({
         alignSelf: 'center',
         maxWidth: 160,
     },
-    // Viiva erottamaan objektit testaamiseen
-    //    DiscoverSeparator: {
-    //    borderBottomWidth: 3,
-    //    borderBottomColor: 'green',
-    //    paddingBottom: 10, 
-    //    marginBottom: 10, 
-    //},
-
+    // MyRecipes.js styles
+    MyRecipesImage: {
+        width: '100%',
+        height: 90,
+        resizeMode: 'cover',
+        borderRadius: 30,
+        marginBottom: 10,
+        marginHorizontal: 10,
+        alignSelf: 'center',
+    },
     //Recipe.js styles
     containerRecipe: {
         // reseptin tekstien sisällölle
@@ -338,6 +400,7 @@ export const darkTheme = StyleSheet.create({
         fontFamily: 'Exo',
         fontSize: 14,
         paddingLeft: 30,
+        color: 'white',
     },
     RecipeInfo: {
         flexDirection: 'row',
@@ -362,7 +425,7 @@ export const darkTheme = StyleSheet.create({
     RecipeH3: {
         fontFamily: 'Exo',
         fontSize: 15,
-        color: 'black',
+        color: 'white',
         textAlign: 'left',
     },
     RecipeH3Space: {
@@ -434,17 +497,34 @@ export const darkTheme = StyleSheet.create({
         textAlign: 'center',
         textTransform: 'uppercase',
     },
+    buttonNotification: {
+        textAlign: 'center',
+        fontSize: 14,
+        color: 'gray',
+    },
 });
 
 //VÄRISOKEUSTILA ALKAA TÄSTÄ
 export const colorblindTheme = StyleSheet.create({
     // värisokeustilan tyylit
+    scrollview: {
+        backgroundColor: 'white',
+    },
     containerFullWidth: {
         flex: 1,
         backgroundColor: 'white', 
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
+        headerStyle: {
+            backgroundColor: 'white',
+    },
+        bottomNavigationStyle: {
+            backgroundColor: 'black', 
+    },
+    tabBarActiveBackgroundColor: '#black',
+    settingsColor: 'black',
+        
     container: {
         // normaalille sisällölle
         flex: 1,
@@ -469,6 +549,14 @@ export const colorblindTheme = StyleSheet.create({
         color: 'black',
         paddingBottom: 20,
     },
+    h4: {
+        fontFamily: 'Exo',
+        fontSize: 14,
+        textAlign: 'center',
+        color: 'white',
+        lineHeight: 20,
+        paddingVertical: 10,
+    },
     vali: {
         paddingTop: 40,
         marginBottom: 10,
@@ -483,6 +571,12 @@ export const colorblindTheme = StyleSheet.create({
         borderBottomWidth: 1,
         marginVertical: 10,
         paddingTop: 20,
+    },
+    WhiteBox: {
+        backgroundColor: 'black',
+        borderRadius: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     },
     CatalogRow: {
         flexDirection: 'row',
@@ -527,14 +621,17 @@ export const colorblindTheme = StyleSheet.create({
         alignSelf: 'center',
         maxWidth: 160,
     },
-    // Viiva erottamaan objektit testaamiseen
-    //    DiscoverSeparator: {
-    //    borderBottomWidth: 3,
-    //    borderBottomColor: 'green',
-    //    paddingBottom: 10, 
-    //    marginBottom: 10, 
-    //},
-
+    // MyRecipes.js styles
+    MyRecipesImage: {
+        width: '100%',
+        height: 90,
+        resizeMode: 'cover',
+        borderRadius: 30,
+        marginBottom: 10,
+        marginHorizontal: 10,
+        alignSelf: 'center',
+    },
+    
     //Recipe.js styles
     containerRecipe: {
         // reseptin tekstien sisällölle
@@ -626,7 +723,7 @@ export const colorblindTheme = StyleSheet.create({
         paddingHorizontal: 20,
     },
     buttonAdd: {
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         borderRadius: 30,
         padding: 10,
         marginVertical: 10,
@@ -652,6 +749,11 @@ export const colorblindTheme = StyleSheet.create({
         color: 'black',
         textAlign: 'center',
         textTransform: 'uppercase',
+    },
+    buttonNotification: {
+        textAlign: 'center',
+        fontSize: 14,
+        color: 'gray',
     },
 });
 const Styles = { lightTheme, darkTheme, colorblindTheme };
