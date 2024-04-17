@@ -1,36 +1,38 @@
-import React, { useState, useContext } from 'react'; // Lisätty useContext
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
 import { useTheme } from '../styles/ThemeContext';
 
-
-const Recipe = ({ route }) => { 
-    const { recipe } = route.params;
+const Recipe = ({ route }) => {
     const { selectedTheme } = useTheme();
+    const { recipe } = route.params;
 
-     // Yliviivaa ainesosat ja ohjeet, kun niitä painetaan
+    // Yliviivaa ainesosat ja ohjeet, kun niitä painetaan
     // Tekee uuden taulukon vertailuun, true = yliviivattu
-    const [crossOutIngredients, setCrossOutIngredients] = useState(new Array(recipe.ingredients.length).fill(false));
-    const [crossOutInstructions, setCrossOutInstructions] = useState(new Array(recipe.instructions.length).fill(false));
+    const [crossOutIngredients, setcrossOutIngredients] = useState(new Array(recipe.ingredients.length).fill(false));
+    const [crossOutInstructions, setcrossOutInstructions] = useState(new Array(recipe.instructions.length).fill(false));
 
     const toggleIngredient = (index) => {
-        const newCrossOutIngredients = [...crossOutIngredients];
-        newCrossOutIngredients[index] = !newCrossOutIngredients[index];
-        setCrossOutIngredients(newCrossOutIngredients);
+        const newcrossOutIngredients = [...crossOutIngredients];
+        newcrossOutIngredients[index] = !newcrossOutIngredients[index];
+        setcrossOutIngredients(newcrossOutIngredients);
     };
 
     const toggleInstruction = (index) => {
-        const newCrossOutInstructions = [...crossOutInstructions];
-        newCrossOutInstructions[index] = !newCrossOutInstructions[index];
-        setCrossOutInstructions(newCrossOutInstructions);
+        const newcrossOutInstructions = [...crossOutInstructions];
+        newcrossOutInstructions[index] = !newcrossOutInstructions[index];
+        setcrossOutInstructions(newcrossOutInstructions);
     };
 
     // Kuva placeholderina
     return (
         <ScrollView>
             <View style={selectedTheme.containerFullWidth}>
-                <Image source={require('../components/img.jpeg')} style={selectedTheme.RecipeImage} />
+
+            <Image style={selectedTheme.RecipeImage}
+            source={ recipe.image ? { uri: recipe.image } : require('../components/myrecipes.png') }/>
 
                 <View style={selectedTheme.containerRecipe}>
                     <Text style={selectedTheme.h1}>{recipe.name}</Text>
@@ -53,18 +55,18 @@ const Recipe = ({ route }) => {
                         <FontAwesome5 name="carrot" style={selectedTheme.RecipeIcon} />
                         &nbsp;&nbsp; Ainekset</Text>
 
-                    <View style={{ marginHorizontal: 10 }}>
+                        <View style={{marginHorizontal: 10}}>
 
-                        {recipe.ingredients.map((ingredient, index) => (
-                            <TouchableOpacity key={index} onPress={() => toggleIngredient(index)}>
-                                <Text style={[selectedTheme.RecipeIngredients, {
-                                    textDecorationLine: crossOutIngredients[index] ? 'line-through' : 'none',
-                                    backgroundColor: index % 2 === 0 ? 'white' : 'transparent',
-                                }]}>
-                                    <Text>{ingredient}</Text>
-                                </Text>
-                            </TouchableOpacity>
-                        ))}
+                    {recipe.ingredients.map((ingredient, index) => (
+                        <TouchableOpacity key={index} onPress={() => toggleIngredient(index)}>
+                            <Text style={[selectedTheme.RecipeIngredients, {
+                                textDecorationLine: crossOutIngredients[index] ? 'line-through' : 'none',
+                                backgroundColor: index % 2 === 0 ? 'white' : 'transparent',
+                            }]}>
+                                <Text>{ingredient}</Text>
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
                     </View>
 
                     <Text style={[selectedTheme.vali, selectedTheme.RecipeH2]}>
@@ -76,21 +78,18 @@ const Recipe = ({ route }) => {
                                 <View style={selectedTheme.RecipeInstRow}>
                                     <View style={selectedTheme.numberContainer}>
                                         <Text style={selectedTheme.RecipeH3}>{index + 1 + "."}</Text>
-                                    </View>
-                                    <View style={selectedTheme.textContainer}>
-                                        <Text style={[selectedTheme.txt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
-                                            <Text>{instruction}</Text>
-                                        </Text>
-                                    </View>
                                 </View>
-                            </TouchableOpacity>
-                        ))}
-                    </View>
-                </View>
+                                <View style={selectedTheme.textContainer}>
+                                    <Text style={[selectedTheme.txt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
+                                        <Text>{instruction}</Text></Text>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    ))}</View>
             </View>
-        </ScrollView>
+        </View>
+        </ScrollView >
     );
 }
 
 export default Recipe;
-
