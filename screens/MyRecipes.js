@@ -4,10 +4,12 @@ import { getData, getAllKeys } from "../util/LocalStorageUtil"
 import RecipeList from '../components/RecipeList';
 import RecipeSearch from '../components/RecipeSearch';
 import useRecipes from '../hooks/useRecipes';
-import Styles from '../styles/Styles';
+
+import { useTheme } from '../styles/ThemeContext';
 
 export default function MyRecipes() {
     const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
+    const { selectedTheme } = useTheme(); 
 
     useEffect(() => {
         (async () => {
@@ -36,7 +38,7 @@ export default function MyRecipes() {
     }
 
     return (
-        <View style={Styles.vali}>
+        <View style={selectedTheme.vali}>
             <RecipeSearch setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
             <RecipeList filteredRecipes={filteredRecipes} handleRecipePress={handleRecipePress} />
         </View>
