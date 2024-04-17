@@ -1,12 +1,13 @@
 import { TextInput } from 'react-native';
-import Styles from '../styles/Styles';
+import { useTheme } from '../styles/ThemeContext'; 
 
 export default RecipeSearch = ({ setSearchQuery, searchQuery }) => {
+    const { selectedTheme } = useTheme(); 
 
     return (
         <>
             <TextInput
-                style={Styles.searchBar}
+                style={selectedTheme.searchBar}
                 placeholder='Etsi reseptejä'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
