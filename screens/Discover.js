@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { firestore, collection, RECIPES } from '../firebase/Config.js';
-import { query, onSnapshot, orderBy, limit } from 'firebase/firestore';
+import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
 
@@ -9,10 +10,10 @@ import { useTheme } from '../styles/ThemeContext';
 
 export default function Discover() {
     const navigation = useNavigation();
-    const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState([])
     const [searchQuery, setSearchQuery] = useState('');
 
-    const { selectedTheme } = useTheme(); 
+    const { selectedTheme } = useTheme();
 
     useEffect(() => {
         const q = query(
@@ -42,39 +43,41 @@ export default function Discover() {
         }
     }, [])
 
+    
     const handleRecipePress = (recipe) => {
         navigation.navigate('Recipe', { recipe });
     }
-
+    
     const filteredRecipes = recipes.filter((recipe) =>
         recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    const renderRecipeItem = ({ item }) => (
-        <TouchableOpacity onPress={() => handleRecipePress(item)}>
-            <View style={selectedTheme.DiscoverItem}>
-                <Image
-                    source={{ uri: item.image }}
-                    style={selectedTheme.CatalogImage}
-                />
-                <Text style={[selectedTheme.DiscoverH3, selectedTheme.maxWidth]}>{item.name}</Text>
-            </View>
-        </TouchableOpacity>
-    );
+        const renderRecipeItem = ({ item }) => (
+            <TouchableOpacity onPress={() => handleRecipePress(item)}>
+                <View style={selectedTheme.DiscoverItem}>
+                    <Image
+                        source={{ uri: item.image }}
+                        style={selectedTheme.CatalogImage}
+                    />
+                    <Text style={[selectedTheme.DiscoverH3, selectedTheme.maxWidth]}>{item.name}</Text>
+                </View>
+            </TouchableOpacity>
+        );
 
     return (
-        <ScrollView>
+        <ScrollView style={selectedTheme.scrollview}>
             <View style={selectedTheme.container}>
-                <TextInput
-                    style={selectedTheme.searchBar}
-                    placeholder='Etsi reseptejä'
-                    onChangeText={(text) => setSearchQuery(text)}
-                    value={searchQuery}
-                />
+            <TextInput
+                style={selectedTheme.searchBar}
+                placeholder='Etsi reseptejä'
+                onChangeText={(text) => setSearchQuery(text)}
+                value={searchQuery}
+            />
 
-                <Text style={[selectedTheme.h1, selectedTheme.vali]}>Löydä uusia reseptejä</Text>
 
-                <FlatList
+            <Text style={[selectedTheme.h1, selectedTheme.vali]}>Löydä uusia reseptejä</Text>
+
+            <FlatList
                     data={filteredRecipes}
                     renderItem={renderRecipeItem}
                     keyExtractor={(item) => item.id}
@@ -83,7 +86,10 @@ export default function Discover() {
                     scrollEnabled={false}
                     contentContainerStyle={{}}
                 />
+
             </View>
+
         </ScrollView>
     );
+    
 }
