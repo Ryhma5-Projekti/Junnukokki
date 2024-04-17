@@ -62,7 +62,8 @@ export default function Tips() {
 
             <TextInput
                 style={selectedTheme.searchBar}
-                placeholder='Etsi vinkkejä'
+                placeholderTextColor={selectedTheme.searchBarPlaceholder.color}
+                placeholder='Etsi vinkkejä...'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />

@@ -12,20 +12,20 @@ export default function Settings() {
     };
 
     return (
-        <ScrollView style={Styles.scrollView}>
+        <ScrollView style={selectedTheme.scrollView}>
             <View style={selectedTheme.container}>
                 <Text style={[selectedTheme.h1, selectedTheme.vali]}>Sovelluksen ulkonäkö</Text>
 
                 <TouchableOpacity onPress={() => handleThemeChange('light')}>
-                    <Text style={[selectedTheme.h3, Styles.centerText]}>Vaalea teema</Text>
+                    <Text style={[selectedTheme.h3, selectedTheme.centerText]}>Vaalea teema</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => handleThemeChange('dark')}>
-                    <Text style={[selectedTheme.h3, Styles.centerText]}>Tumma teema</Text>
+                    <Text style={[selectedTheme.h3, selectedTheme.centerText]}>Tumma teema</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => handleThemeChange('colorblind')}>
-                    <Text style={[selectedTheme.h3, Styles.centerText]}>Värisokeustila</Text>
+                    <Text style={[selectedTheme.h3, selectedTheme.centerText]}>Värisokeustila</Text>
                 </TouchableOpacity>
 
                 <Text style={[selectedTheme.h1, selectedTheme.vali]}>Tietoja Sovelluksesta</Text>

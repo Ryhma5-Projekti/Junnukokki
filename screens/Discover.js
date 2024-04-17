@@ -69,7 +69,8 @@ export default function Discover() {
             <View style={selectedTheme.container}>
             <TextInput
                 style={selectedTheme.searchBar}
-                placeholder='Etsi reseptejä'
+                placeholderTextColor={selectedTheme.searchBarPlaceholder.color}
+                placeholder='Etsi reseptejä...'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />

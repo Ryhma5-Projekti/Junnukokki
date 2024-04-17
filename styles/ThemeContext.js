@@ -1,38 +1,32 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { lightTheme, darkTheme, colorblindTheme } from './Styles';
+import { lightTheme, darkTheme, colorblindTheme } from './NewStyles';
 
+// Create a context
 const ThemeContext = createContext();
 
+// Create a provider component
 export const ThemeProvider = ({ children }) => {
-    const [selectedTheme, setSelectedTheme] = useState(lightTheme); // Default to light theme initially
+    const [selectedTheme, setSelectedTheme] = useState(lightTheme);
 
     useEffect(() => {
-        const loadTheme = async () => {
+        (async () => {
             const savedThemeName = await AsyncStorage.getItem('themeName');
-            const theme = getThemeFromName(savedThemeName || 'light'); // Default to light if nothing is saved
-            setSelectedTheme(theme);
-        };
-        loadTheme();
+            setSelectedTheme(themesByIdentifier[savedThemeName || 'default']);
+        })()
     }, []);
 
-    const getThemeFromName = (themeName) => {
-        switch (themeName) {
-            case 'dark':
-                return darkTheme;
-            case 'colorblind':
-                return colorblindTheme;
-            case 'light':
-            default:
-                return lightTheme;
-        }
-    };
+    const themesByIdentifier = {
+        'default': lightTheme,
+        'light': lightTheme,
+        'dark': darkTheme,
+        'colorblind': colorblindTheme,
+    }
 
     const toggleTheme = async (themeName) => {
-        const newTheme = getThemeFromName(themeName);
-        setSelectedTheme(newTheme);
+        setSelectedTheme(themesByIdentifier[themeName || 'default']);
         await AsyncStorage.setItem('themeName', themeName); // Persist theme selection
-    };
+    }; 
 
     return (
         <ThemeContext.Provider value={{ selectedTheme, toggleTheme }}>
@@ -41,7 +35,7 @@ export const ThemeProvider = ({ children }) => {
     );
 };
 
-// Export the useTheme hook for easy access to the context
+// Custom hook to access the forceUpdate value
 export const useTheme = () => useContext(ThemeContext);
 
-export default ThemeContext;
+export default ThemeContext
