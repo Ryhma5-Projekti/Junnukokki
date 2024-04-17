@@ -1,62 +1,62 @@
-import React, { useState, useEffect, useContext } from "react";
-import { TextInput, View, Text, Button, ScrollView, Pressable } from "react-native";
-import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from "../util/LocalStorageUtil";
-import RecipeForm from "../components/RecipeForm";
-import RecipeSchema from "../data/RecipeSchema.json";
+import React, { useState, useEffect } from "react"
+import { TextInput, View, Text, Button, ScrollView, Pressable } from "react-native"
+import { storeData, getData, generateSHA256, getAllKeys, removeAllKeys } from "../util/LocalStorageUtil"
+import RecipeForm from "../components/RecipeForm"
+import RecipeSchema from "../data/RecipeSchema.json"
 
 import { useTheme } from '../styles/ThemeContext';
 
-export default function AddNewRecipe() {
+export default AddNewRecipe = () => {
     const { selectedTheme, toggleTheme } = useTheme();
 
-    const [schema, setSchema] = useState({});
+    const [schema, setSchema] = useState({})
     useEffect(() => {
         // Create a deep copy
-        setSchema(JSON.parse(JSON.stringify(RecipeSchema)));
-    }, []);
+        setSchema(JSON.parse(JSON.stringify(RecipeSchema)))
+    }, [])
 
-    const [storedStatus, setStoredStatus] = useState('-');
+    const [storedStatus, setStoredStatus] = useState(' ')
     const storeItem = async () => {
-        let result = false;
+        let result = false
         try {
-            const converted = convertSchemaToRecipe(schema);
-            await storeData(generateSHA256(converted), converted);
-            result = true;
+            const converted = convertSchemaToRecipe(schema)
+            await storeData(generateSHA256(converted), converted)
+            result = true
         } catch {
-            console.error("Error while storing local data");
+            console.error("Error while storing local data")
         }
 
-        changeStatus(setStoredStatus, result);
-    };
+        changeStatus(setStoredStatus, result)
+    }
     const changeStatus = (setValue, boolean) => {
-        setValue(boolean ? "success" : "failed");
-    };
+        setValue(boolean ? "Reseptin lisäys onnistui" : "Reseptiä ei lisätty")
+    }
     const convertSchemaToRecipe = (schema) => {
         return recipe = Object.entries(schema).reduce((acc, [key, item]) => (
             { ...acc, ...{ [key]: item.multiline ? item.value.split('\n') : item.value } }
-        ), {});
-    };
+        ), {})
+    }
 
-    const [allRecipes, setAllRecipes] = useState([]);
+    const [allRecipes, setAllRecipes] = useState([])
     const getAllLocalRecipes = async () => {
-        const recipes = [];
+        const recipes = []
         try {
-            let keys = await getAllKeys();
+            let keys = await getAllKeys()
 
             // Convert null/undefined/singleton into an array
             keys = !keys ? [] :
-                !Array.isArray(keys) ? keys = [keys] : keys;
+                !Array.isArray(keys) ? keys = [keys] : keys
 
             for (const key of keys) {
                 const recipe = await getData(key);
                 recipes.push(recipe);
             }
 
-            setAllRecipes(recipes);
+            setAllRecipes(recipes)
         } catch (error) {
-            console.error("Error while fetching keys:", error);
+            console.error("Error while fetching keys:", error)
         }
-    };
+    }
 
     const inputChange = (key, text) => {
         setSchema(prevSchema => ({
@@ -65,36 +65,20 @@ export default function AddNewRecipe() {
                 ...prevSchema[key],
                 value: text
             }
-        }));
-    };
+        }))
+    }
 
     return (
         <ScrollView>
             <View style={selectedTheme.container}>
-                <RecipeForm schema={schema} inputChange={inputChange} />
+            <RecipeForm schema={schema} inputChange={inputChange} />
 
-                <Text>SHA256: {generateSHA256(schema)}</Text>
-
-                <Pressable onPress={storeItem} style={selectedTheme.buttonAdd}>
-                    <Text style={selectedTheme.buttonText}>Lisää resepti</Text>
-                </Pressable>
-                <Text>Last stored status: {storedStatus}</Text>
-
-                <Text>fetch all local recipes:</Text>
-
-                <Pressable onPress={getAllLocalRecipes} style={selectedTheme.buttonAdd}>
-                    <Text style={selectedTheme.buttonText}>Fetch all</Text>
-                </Pressable>
-                {allRecipes.map((item, index) => (
-                    <Text key={index}>
-                        recipe #{index}: {JSON.stringify(item)}
-                    </Text>
-                ))}
-
-                <Pressable onPress={removeAllKeys} style={selectedTheme.buttonDelete}>
-                    <Text style={selectedTheme.buttonTextDelete}>Remove all keys</Text>
-                </Pressable>
+        <View style={selectedTheme.vali}>
+            <Pressable onPress={storeItem} style={selectedTheme.buttonAdd}>
+                <Text style={selectedTheme.buttonText}>Lisää resepti</Text></Pressable>
+                </View>
+                <Text style={selectedTheme.buttonNotification}>{storedStatus}</Text>
             </View>
         </ScrollView>
-    );
-};
+    )
+}
