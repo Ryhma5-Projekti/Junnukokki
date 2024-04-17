@@ -529,6 +529,25 @@ export const darkTheme = StyleSheet.create({
         fontSize: 14,
         color: 'gray',
     },
+    DimmingCover: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    Modal: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        paddingVertical: 20,
+        paddingHorizontal: 30,
+        marginHorizontal: 10,
+    },
+    SideBySideButton: {
+        flex: 1,
+        maxWidth: '50%',
+        padding: 10,
+        margin: 5,
+    },
 });
 
 //VÄRISOKEUSTILA ALKAA TÄSTÄ
@@ -781,6 +800,25 @@ export const colorblindTheme = StyleSheet.create({
         textAlign: 'center',
         fontSize: 14,
         color: 'gray',
+    },
+    DimmingCover: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    Modal: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        paddingVertical: 20,
+        paddingHorizontal: 30,
+        marginHorizontal: 10,
+    },
+    SideBySideButton: {
+        flex: 1,
+        maxWidth: '50%',
+        padding: 10,
+        margin: 5,
     },
 });
 const Styles = { lightTheme, darkTheme, colorblindTheme };

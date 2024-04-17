@@ -3,9 +3,12 @@ import { Modal, Text, View, Pressable, Animated } from 'react-native';
 import Styles from '../styles/Styles';
 import { generateSHA256, removeData } from '../util/LocalStorageUtil';
 import { useForceUpdate } from '../hooks/ForceUpdateProvider';
+import { useTheme } from '../styles/ThemeContext';
 
 
 export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
+    const { selectedTheme } = useTheme();
+    
     const [removalImminent, setRemovalImminent] = useState(false);
     const [cancelRemoval, setCancelRemoval] = useState(false)
     useEffect(() => {
@@ -97,28 +100,28 @@ export default RemoveRecipeModal = ({ toggleModal, modalVisible, recipe }) => {
             visible={modalVisible}
             onRequestClose={toggleModal}
         >
-            <View style={Styles.DimmingCover}>
-                <Animated.View style={[Styles.Modal,
+            <View style={selectedTheme.DimmingCover}>
+                <Animated.View style={[selectedTheme.Modal,
                 { transform: [{ translateY }, { scale: scaleValue }] }]}>
 
-                    <Text style={Styles.h2}>
+                    <Text style={selectedTheme.h2}>
                         Halutako poistaa reseptin{' '}
                         '{recipe && <Text style={{ fontStyle: 'italic' }}>{recipe.name}</Text>}'
                         {' '}pysyvästi?
                     </Text>
 
                     <View style={{ flexDirection: 'row' }}>
-                        <Pressable style={[Styles.buttonDelete, Styles.SideBySideButton]}
+                        <Pressable style={[selectedTheme.buttonDelete, selectedTheme.SideBySideButton]}
                             onPress={startCountdown}>
-                            <Text style={Styles.buttonTextDelete}>
+                            <Text style={selectedTheme.buttonTextDelete}>
                                 {countdown == CD_INITIAL ? 'Poista' :
                                     countdown > CD_TRIGGER ? `Kumoa (${countdown})` : "Poistettu!"}
                             </Text>
                         </Pressable>
 
-                        <Pressable style={[Styles.buttonAdd, Styles.SideBySideButton]}
+                        <Pressable style={[selectedTheme.buttonAdd, selectedTheme.SideBySideButton]}
                             onPress={toggleModal}>
-                            <Text style={Styles.buttonText}>Peruuta</Text>
+                            <Text style={selectedTheme.buttonText}>Peruuta</Text>
                         </Pressable>
                     </View>
 
