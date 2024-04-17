@@ -210,6 +210,11 @@ export const lightTheme = StyleSheet.create({
         width: '100%',
         height: 'auto',
     },
+    RecipeInstTxt:{
+        fontSize: 14,
+        lineHeight: 20,
+        color: 'black',
+    }, 
     numberContainer: {
         marginRight: 10,
     },
@@ -482,6 +487,11 @@ export const darkTheme = StyleSheet.create({
         width: '100%',
         height: 'auto',
     },
+    RecipeInstTxt:{
+        fontSize: 14,
+        lineHeight: 20,
+        color: 'black',
+    }, 
     numberContainer: {
         marginRight: 10,
     },
@@ -754,6 +764,11 @@ export const colorblindTheme = StyleSheet.create({
         width: '100%',
         height: 'auto',
     },
+    RecipeInstTxt:{
+        fontSize: 14,
+        lineHeight: 20,
+        color: 'black',
+    }, 
     numberContainer: {
         marginRight: 10,
     },
