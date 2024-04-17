@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, ScrollView, Text, Image } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import MyRecipes from './MyRecipes';
 
 import { useTheme } from '../styles/ThemeContext';
 
@@ -9,47 +11,13 @@ export default function HomeScreen() {
     const { selectedTheme } = useTheme(); 
 
     return (
-        <ScrollView>
-            <View style={selectedTheme.container}> 
-                <Text>Home Screen</Text>
-
-                <View style={selectedTheme.CatalogRow}>
-                    <View style={selectedTheme.CatalogItem}>
-                        <Image
-                            source={require('../components/img.jpeg')}
-                            style={selectedTheme.CatalogImage}
-                            onPress={() => navigation.navigate('Recipe')}
-                        />
-                        <Text
-                            onPress={() => navigation.navigate('Recipe')}
-                            style={selectedTheme.h3}
-                        >Resepti 1</Text>
-                    </View>
-                    <View style={selectedTheme.CatalogItem}>
-                        <Image source={require('../components/img.jpeg')} style={selectedTheme.CatalogImage} />
-                        <Text style={selectedTheme.h3}>Resepti 1</Text>
-                    </View>
-                </View>
-                <View style={selectedTheme.CatalogRow}>
-                    <View style={selectedTheme.CatalogItem}>
-                        <Image source={require('../components/img.jpeg')} style={selectedTheme.CatalogImage} />
-                        <Text style={selectedTheme.h3}>Resepti 1</Text>
-                    </View>
-                    <View style={selectedTheme.CatalogItem}>
-                        <Image source={require('../components/img.jpeg')} style={selectedTheme.CatalogImage} />
-                        <Text style={selectedTheme.h3}>Resepti 1</Text>
-                    </View>
-                </View>
-                <View style={selectedTheme.CatalogRow}>
-                    <View style={selectedTheme.CatalogItem}>
-                        <Image source={require('../components/img.jpeg')} style={selectedTheme.CatalogImage} />
-                        <Text style={selectedTheme.h3}>Resepti 1</Text>
-                    </View>
-                    <View style={selectedTheme.CatalogItem}>
-                        <Image source={require('../components/img.jpeg')} style={selectedTheme.CatalogImage} />
-                        <Text style={selectedTheme.h3}>Resepti 1</Text>
-                    </View>
-                </View>
+        <ScrollView style={selectedTheme.scrollview}>
+            <View style={selectedTheme.container}>
+            <View style={selectedTheme.WhiteBox}>
+            <Text style={selectedTheme.h4}>Junnukokki on reseptisovellus, joka tarjoaa helppoja reseptejä ja ruuanlaittovinkkejä aloitteleville kokeille.</Text>
+            <Text style={selectedTheme.h4}>Sovelluksessa voit tallentaa omia reseptejäsi, löytää hyväksi todettuja ohjeita valmiista arkistosta ja inspiroitua ammattilaisten keittiövinkeistä.</Text>
+            </View>
+                <MyRecipes />
             </View>
         </ScrollView>
     );
