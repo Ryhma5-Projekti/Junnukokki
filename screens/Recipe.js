@@ -80,7 +80,7 @@ const Recipe = ({ route }) => {
                                         <Text style={selectedTheme.RecipeH3}>{index + 1 + "."}</Text>
                                 </View>
                                 <View style={selectedTheme.textContainer}>
-                                    <Text style={[selectedTheme.txt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
+                                    <Text style={[selectedTheme.RecipeInstTxt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
                                         <Text>{instruction}</Text></Text>
                                 </View>
                             </View>
