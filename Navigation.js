@@ -137,7 +137,7 @@ function Header() {
                 <FontAwesome5
                     name="cog"
                     size={28}
-                    color={selectedTheme.settingsColor} 
+                    color='#78B29C'
                     onPress={() => navigation.navigate('Settings')}
                 />
             </View>
