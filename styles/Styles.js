@@ -17,8 +17,12 @@ export const lightTheme = StyleSheet.create({
     bottomNavigationStyle: {
         backgroundColor: '#78B29C',
     },
-    tabBarActiveBackgroundColor: '#6A9C89',
-    settingsColor: '#78B29C',
+    tabBarActiveBackgroundColor: {
+        backgroundColor:'#6A9C89',
+    }, 
+    /*   settingsColor:{
+            color:'#78B29C',
+    },*/
 
     container: {
         // normaalille sisällölle
@@ -301,8 +305,12 @@ export const darkTheme = StyleSheet.create({
     bottomNavigationStyle: {
         backgroundColor: '#78B29C', 
     },
-    tabBarActiveBackgroundColor: '#6A9C89',
-    settingsColor: '#78B29C',
+    tabBarActiveBackgroundColor: {
+        backgroundColor:'#6A9C89',
+    }, 
+     /*   settingsColor:{
+            color:'#78B29C',
+    },*/
 
     container: {
         // normaalille sisällölle
@@ -578,9 +586,14 @@ export const colorblindTheme = StyleSheet.create({
         bottomNavigationStyle: {
             backgroundColor: 'black', 
     },
-    tabBarActiveBackgroundColor: '#black',
-    settingsColor: 'black',
-        
+    
+        tabBarActiveBackgroundColor: {
+            backgroundColor:'black',
+    },
+     /*   settingsColor:{
+            color:'black',
+    },*/
+    
     container: {
         // normaalille sisällölle
         flex: 1,
