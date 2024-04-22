@@ -36,7 +36,7 @@ export default function BottomNavigation() {
                             fontFamily: 'Exo',
                             paddingBottom: 25,
                         },
-                        tabBarActiveBackgroundColor: selectedTheme.tabBarActiveBackgroundColor,
+                        tabBarActiveBackgroundColor: selectedTheme.tabBarActiveBackgroundColor.backgroundColor,
                         tabBarActiveTintColor: '#fff',   // aktiivinen tekstiväri
                         tabBarInactiveTintColor: '#fff',    // inaktiivinen tekstiväri
                     }}
@@ -137,7 +137,7 @@ function Header() {
                 <FontAwesome5
                     name="cog"
                     size={28}
-                    color='#78B29C'
+                    color={selectedTheme.settingsColor.color}
                     onPress={() => navigation.navigate('Settings')}
                 />
             </View>

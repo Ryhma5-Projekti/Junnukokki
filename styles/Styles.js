@@ -4,7 +4,7 @@ export const lightTheme = StyleSheet.create({
     // Vaalean teeman tyylit
     scrollview: {
         backgroundColor: '#FAF5F1',
-    },   
+    },
     containerFullWidth: {
         flex: 1,
         backgroundColor: '#FAF5F1',
@@ -18,11 +18,11 @@ export const lightTheme = StyleSheet.create({
         backgroundColor: '#78B29C',
     },
     tabBarActiveBackgroundColor: {
-        backgroundColor:'#6A9C89',
-    }, 
-    /*   settingsColor:{
-            color:'#78B29C',
-    },*/
+        backgroundColor: '#6A9C89',
+    },
+    settingsColor: {
+        color: '#78B29C',
+    },
 
     container: {
         // normaalille sisällölle
@@ -55,7 +55,7 @@ export const lightTheme = StyleSheet.create({
         textAlign: 'center',
         color: '#D2575C',
         paddingBottom: 20,
-        },
+    },
     h4: {
         fontFamily: 'Exo',
         fontSize: 14,
@@ -214,11 +214,11 @@ export const lightTheme = StyleSheet.create({
         width: '100%',
         height: 'auto',
     },
-    RecipeInstTxt:{
+    RecipeInstTxt: {
         fontSize: 14,
         lineHeight: 20,
         color: 'black',
-    }, 
+    },
     numberContainer: {
         marginRight: 10,
     },
@@ -303,14 +303,14 @@ export const darkTheme = StyleSheet.create({
         backgroundColor: '#2b2b2b',
     },
     bottomNavigationStyle: {
-        backgroundColor: '#78B29C', 
+        backgroundColor: '#78B29C',
     },
     tabBarActiveBackgroundColor: {
-        backgroundColor:'#6A9C89',
-    }, 
-     /*   settingsColor:{
-            color:'#78B29C',
-    },*/
+        backgroundColor: '#6A9C89',
+    },
+    settingsColor: {
+        color: '#78B29C',
+    },
 
     container: {
         // normaalille sisällölle
@@ -495,11 +495,11 @@ export const darkTheme = StyleSheet.create({
         width: '100%',
         height: 'auto',
     },
-    RecipeInstTxt:{
+    RecipeInstTxt: {
         fontSize: 14,
         lineHeight: 20,
         color: 'black',
-    }, 
+    },
     numberContainer: {
         marginRight: 10,
     },
@@ -576,24 +576,24 @@ export const colorblindTheme = StyleSheet.create({
     },
     containerFullWidth: {
         flex: 1,
-        backgroundColor: 'white', 
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'flex-start',
     },
-        headerStyle: {
-            backgroundColor: 'white',
+    headerStyle: {
+        backgroundColor: 'white',
     },
-        bottomNavigationStyle: {
-            backgroundColor: 'black', 
+    bottomNavigationStyle: {
+        backgroundColor: 'black',
     },
-    
-        tabBarActiveBackgroundColor: {
-            backgroundColor:'black',
+
+    tabBarActiveBackgroundColor: {
+        backgroundColor: 'black',
     },
-     /*   settingsColor:{
-            color:'black',
-    },*/
-    
+    settingsColor: {
+        color: 'black',
+    },
+
     container: {
         // normaalille sisällölle
         flex: 1,
@@ -700,7 +700,7 @@ export const colorblindTheme = StyleSheet.create({
         marginHorizontal: 10,
         alignSelf: 'center',
     },
-    
+
     //Recipe.js styles
     containerRecipe: {
         // reseptin tekstien sisällölle
@@ -777,11 +777,11 @@ export const colorblindTheme = StyleSheet.create({
         width: '100%',
         height: 'auto',
     },
-    RecipeInstTxt:{
+    RecipeInstTxt: {
         fontSize: 14,
         lineHeight: 20,
         color: 'black',
-    }, 
+    },
     numberContainer: {
         marginRight: 10,
     },
