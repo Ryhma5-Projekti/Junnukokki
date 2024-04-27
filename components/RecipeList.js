@@ -1,21 +1,22 @@
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import Styles from '../styles/Styles';
+import { useTheme } from '../styles/ThemeContext'; 
 
 export default RecipeList = ({ filteredRecipes, handleRecipePress, onLongPress }) => {
-
+    const { selectedTheme } = useTheme(); 
+    
     return (
-        <View style={Styles.vali}>
-            <Text style={Styles.h1}>Omat reseptini</Text>
+        <View style={selectedTheme.vali}>
+            <Text style={selectedTheme.h1}>Omat reseptini</Text>
             {filteredRecipes.map((recipe, index) => (
                 <View key={index}>
                     <TouchableOpacity onPress={() => handleRecipePress(recipe)}
                         onLongPress={() => onLongPress && onLongPress(recipe)}>
-                        <View style={Styles.DiscoverRow}>
+                        <View style={selectedTheme.DiscoverRow}>
                             <Image
                                 source={require('../components/myrecipes.png')}
-                                style={Styles.MyRecipesImage}
+                                style={selectedTheme.MyRecipesImage}
                             />
-                            <Text style={Styles.DiscoverH3}>{recipe.name}</Text>
+                            <Text style={selectedTheme.DiscoverH3}>{recipe.name}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

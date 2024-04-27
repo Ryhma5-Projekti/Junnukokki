@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import Styles from '../styles/Styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
+import { useTheme } from '../styles/ThemeContext';
+
 const Recipe = ({ route }) => {
+    const { selectedTheme } = useTheme();
     const { recipe } = route.params;
 
     // Yliviivaa ainesosat ja ohjeet, kun niitä painetaan
@@ -27,37 +29,37 @@ const Recipe = ({ route }) => {
     // Kuva placeholderina
     return (
         <ScrollView>
-            <View style={Styles.containerFullWidth}>
+            <View style={selectedTheme.containerFullWidth}>
 
-            <Image style={Styles.RecipeImage}
+            <Image style={selectedTheme.RecipeImage}
             source={ recipe.image ? { uri: recipe.image } : require('../components/myrecipes.png') }/>
 
-                <View style={Styles.containerRecipe}>
-                    <Text style={Styles.h1}>{recipe.name}</Text>
+                <View style={selectedTheme.containerRecipe}>
+                    <Text style={selectedTheme.h1}>{recipe.name}</Text>
 
-                    <View style={Styles.RecipeInfo}>
+                    <View style={selectedTheme.RecipeInfo}>
 
-                        <Text style={Styles.RecipeInfoTxt}>
-                            <AntDesign name="clockcircle" style={Styles.RecipeIcon} />
+                        <Text style={selectedTheme.RecipeInfoTxt}>
+                            <AntDesign name="clockcircle" style={selectedTheme.RecipeIcon} />
                             &nbsp;&nbsp; {recipe.time}</Text>
 
-                        <Text style={Styles.RecipeInfoTxt}>
-                            <FontAwesome name="group" style={Styles.RecipeIcon} />
+                        <Text style={selectedTheme.RecipeInfoTxt}>
+                            <FontAwesome name="group" style={selectedTheme.RecipeIcon} />
                             &nbsp;&nbsp; {recipe.servings}</Text>
 
                     </View>
 
-                    <View style={Styles.hr} />
+                    <View style={selectedTheme.hr} />
 
-                    <Text style={Styles.RecipeH2}>
-                        <FontAwesome5 name="carrot" style={Styles.RecipeIcon} />
+                    <Text style={selectedTheme.RecipeH2}>
+                        <FontAwesome5 name="carrot" style={selectedTheme.RecipeIcon} />
                         &nbsp;&nbsp; Ainekset</Text>
 
                         <View style={{marginHorizontal: 10}}>
 
                     {recipe.ingredients.map((ingredient, index) => (
                         <TouchableOpacity key={index} onPress={() => toggleIngredient(index)}>
-                            <Text style={[Styles.RecipeIngredients, {
+                            <Text style={[selectedTheme.RecipeIngredients, {
                                 textDecorationLine: crossOutIngredients[index] ? 'line-through' : 'none',
                                 backgroundColor: index % 2 === 0 ? 'white' : 'transparent',
                             }]}>
@@ -67,18 +69,18 @@ const Recipe = ({ route }) => {
                     ))}
                     </View>
 
-                    <Text style={[Styles.vali, Styles.RecipeH2]}>
-                        <FontAwesome name="file-text" style={Styles.RecipeIcon} />
+                    <Text style={[selectedTheme.vali, selectedTheme.RecipeH2]}>
+                        <FontAwesome name="file-text" style={selectedTheme.RecipeIcon} />
                         &nbsp;&nbsp; Ohjeet</Text>
-                    <View style={Styles.RecipeInstruction}>
+                    <View style={selectedTheme.RecipeInstruction}>
                         {recipe.instructions.map((instruction, index) => (
                             <TouchableOpacity key={index} onPress={() => toggleInstruction(index)}>
-                                <View style={Styles.RecipeInstRow}>
-                                    <View style={Styles.numberContainer}>
-                                        <Text style={Styles.RecipeH3}>{index + 1 + "."}</Text>
+                                <View style={selectedTheme.RecipeInstRow}>
+                                    <View style={selectedTheme.numberContainer}>
+                                        <Text style={selectedTheme.RecipeH3}>{index + 1 + "."}</Text>
                                 </View>
-                                <View style={Styles.textContainer}>
-                                    <Text style={[Styles.txt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
+                                <View style={selectedTheme.textContainer}>
+                                    <Text style={[selectedTheme.RecipeInstTxt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
                                         <Text>{instruction}</Text></Text>
                                 </View>
                             </View>

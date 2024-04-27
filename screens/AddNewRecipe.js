@@ -3,10 +3,13 @@ import { View, Text, ScrollView, Pressable } from "react-native"
 import { storeData, generateSHA256 } from "../util/LocalStorageUtil"
 import RecipeForm from "../components/RecipeForm"
 import RecipeSchema from "../data/RecipeSchema.json"
-import Styles from "../styles/Styles"
+
+import { useTheme } from '../styles/ThemeContext';
 import { useForceUpdate } from "../hooks/ForceUpdateProvider"
 
 export default AddNewRecipe = () => {
+    const { selectedTheme, toggleTheme } = useTheme();
+
     const [schema, setSchema] = useState({})
     useEffect(() => {
         // Create a deep copy
@@ -49,14 +52,14 @@ export default AddNewRecipe = () => {
 
     return (
         <ScrollView>
-            <View style={Styles.container}>
+            <View style={selectedTheme.container}>
             <RecipeForm schema={schema} inputChange={inputChange} />
 
-        <View style={Styles.vali}>
-            <Pressable onPress={storeItem} style={Styles.buttonAdd}>
-                <Text style={Styles.buttonText}>Lisää resepti</Text></Pressable>
+        <View style={selectedTheme.vali}>
+            <Pressable onPress={storeItem} style={selectedTheme.buttonAdd}>
+                <Text style={selectedTheme.buttonText}>Lisää resepti</Text></Pressable>
                 </View>
-                <Text style={Styles.buttonNotification}>{storedStatus}</Text>
+                <Text style={selectedTheme.buttonNotification}>{storedStatus}</Text>
             </View>
         </ScrollView>
     )

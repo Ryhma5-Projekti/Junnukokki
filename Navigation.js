@@ -1,38 +1,42 @@
 import React from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import HomeScreen from './screens/HomeScreen';
 import AddNewRecipe from './screens/AddNewRecipe';
-import Recipe from './screens/Recipe';
-import OpenTips from './screens/OpenTips';
 import Tips from './screens/Tips';
 import Discover from './screens/Discover';
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-import { View, SafeAreaView, Image, Text} from 'react-native';
 import Settings from './screens/Settings';
-import { createStackNavigator } from '@react-navigation/stack';
+import Recipe from './screens/Recipe';
+import OpenTips from './screens/OpenTips';
+
+import { useTheme } from './styles/ThemeContext';
 
 // alkuperäinen navigaatio, joka toimii mutta välkkyy headerin latautuessa aina sivun latauksen yhteydessä...
 // välkkymistä havaittu applen puhelimella, androidilla ei ongelmia?
 
 export default function BottomNavigation() {
     const Tab = createBottomTabNavigator()
+    const { selectedTheme } = useTheme();
     return (
         <>
             <NavigationContainer>
                 <Tab.Navigator
                     screenOptions={{
                         header: () => <Header />,
-                        tabBarStyle: {
-                            backgroundColor: '#78B29C',
-                            height: 100,
+                    tabBarStyle: {
+                        ...selectedTheme.bottomNavigationStyle, 
+                        height: 100,
                         },
                         tabBarLabelStyle: {
                             fontSize: 13,
                             fontFamily: 'Exo',
                             paddingBottom: 25,
                         },
-                        tabBarActiveBackgroundColor: '#6A9C89',
+                        tabBarActiveBackgroundColor: selectedTheme.tabBarActiveBackgroundColor.backgroundColor,
                         tabBarActiveTintColor: '#fff',   // aktiivinen tekstiväri
                         tabBarInactiveTintColor: '#fff',    // inaktiivinen tekstiväri
                     }}
@@ -113,9 +117,11 @@ function HomeStackScreen() {
 // yläpalkki
 function Header() {
     const navigation = useNavigation()
+    const { selectedTheme } = useTheme();
+
     return (
         <SafeAreaView>
-            <View style={{
+            <View style={[{
                 height: 120,
                 paddingHorizontal: 20,
                 paddingTop: 15,
@@ -123,15 +129,15 @@ function Header() {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                backgroundColor: '#FAF5F1',
-            }}>
+            }, selectedTheme.headerStyle]}>
+            
                 <Image
                     source={require('./components/logo_junnukokki_web.png')}
                     style={{ width: '60%', height: '100%', resizeMode: 'contain' }}/>
-                <MaterialIcons
-                    name="settings"
+                <FontAwesome5
+                    name="cog"
                     size={28}
-                    color="#78B29C"
+                    color={selectedTheme.settingsColor.color}
                     onPress={() => navigation.navigate('Settings')}
                 />
             </View>

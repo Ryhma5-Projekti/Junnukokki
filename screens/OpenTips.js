@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import Styles from '../styles/Styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
+import { useTheme } from '../styles/ThemeContext';
+
 const OpenTips = ({ route }) => {
+    const { selectedTheme } = useTheme(); 
     const { discover } = route.params;
 
     // Yliviivaa ainesosat ja ohjeet, kun niitä painetaan
@@ -20,27 +22,27 @@ const OpenTips = ({ route }) => {
     // Kuva placeholderina
     return (
         <ScrollView>
-            <View style={Styles.containerFullWidth}>
+            <View style={selectedTheme.containerFullWidth}>
 
-                <Image source={{ uri: discover.image }} style={Styles.RecipeImage} />
+                <Image source={{ uri: discover.image }} style={selectedTheme.RecipeImage} />
 
 
-                <View style={Styles.containerRecipe}>
-                    <Text style={Styles.h1}>{discover.title}</Text>
+                <View style={selectedTheme.containerRecipe}>
+                    <Text style={selectedTheme.h1}>{discover.title}</Text>
 
 
                         <View style={{marginHorizontal: 10}}>
                     </View>
                     
-                    <View style={Styles.RecipeInstruction}>
+                    <View style={selectedTheme.RecipeInstruction}>
                         {discover.instructions.map((instruction, index) => (
                             <TouchableOpacity key={index} onPress={() => toggleInstruction(index)}>
-                                <View style={Styles.RecipeInstRow}>
-                                    <View style={Styles.numberContainer}>
-                                        <Text style={Styles.RecipeH3}>{index + 1 + "."}</Text>
+                                <View style={selectedTheme.RecipeInstRow}>
+                                    <View style={selectedTheme.numberContainer}>
+                                        <Text style={selectedTheme.RecipeH3}>{index + 1 + "."}</Text>
                                 </View>
-                                <View style={Styles.textContainer}>
-                                    <Text style={[Styles.txt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
+                                <View style={selectedTheme.textContainer}>
+                                    <Text style={[selectedTheme.txt, { textDecorationLine: crossOutInstructions[index] ? 'line-through' : 'none' }]}>
                                         <Text>{instruction}</Text></Text>
                                 </View>
                             </View>

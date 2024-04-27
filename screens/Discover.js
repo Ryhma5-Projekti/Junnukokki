@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { firestore, collection, RECIPES } from '../firebase/Config.js';
 import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
-import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
+
+import { useTheme } from '../styles/ThemeContext';
 
 export default function Discover() {
     const navigation = useNavigation();
     const [recipes, setRecipes] = useState([])
     const [searchQuery, setSearchQuery] = useState('');
+
+    const { selectedTheme } = useTheme();
 
     useEffect(() => {
         const q = query(
@@ -51,28 +54,28 @@ export default function Discover() {
 
         const renderRecipeItem = ({ item }) => (
             <TouchableOpacity onPress={() => handleRecipePress(item)}>
-                <View style={Styles.DiscoverItem}>
+                <View style={selectedTheme.DiscoverItem}>
                     <Image
                         source={{ uri: item.image }}
-                        style={Styles.CatalogImage}
+                        style={selectedTheme.CatalogImage}
                     />
-                    <Text style={[Styles.DiscoverH3, Styles.maxWidth]}>{item.name}</Text>
+                    <Text style={[selectedTheme.DiscoverH3, selectedTheme.maxWidth]}>{item.name}</Text>
                 </View>
             </TouchableOpacity>
         );
 
     return (
-        <ScrollView style={Styles.scrollview}>
-            <View style={Styles.container}>
+        <ScrollView style={selectedTheme.scrollview}>
+            <View style={selectedTheme.container}>
             <TextInput
-                style={Styles.searchBar}
+                style={selectedTheme.searchBar}
                 placeholder='Etsi reseptejä'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />
 
 
-            <Text style={[Styles.h1, Styles.vali]}>Löydä uusia reseptejä</Text>
+            <Text style={[selectedTheme.h1, selectedTheme.vali]}>Löydä uusia reseptejä</Text>
 
             <FlatList
                     data={filteredRecipes}

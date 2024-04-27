@@ -3,11 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { firestore, collection, DISCOVER } from '../firebase/Config.js';
 import { query, onSnapshot, where, orderBy, startAfter, limit } from 'firebase/firestore';
-import Styles from '../styles/Styles';
 import { useNavigation } from '@react-navigation/native';
+
+import { useTheme } from '../styles/ThemeContext';
 
 export default function Tips() {
     const navigation = useNavigation();
+    const { selectedTheme } = useTheme(); 
+
     const [discovers, setDiscovers] = useState([])
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -53,30 +56,30 @@ export default function Tips() {
         );
 
     return (
-        <ScrollView style={Styles.scrollview}>
+        <ScrollView style={selectedTheme.scrollview}>
 
-            <View style={Styles.container}>
+            <View style={selectedTheme.container}>
 
             <TextInput
-                style={Styles.searchBar}
+                style={selectedTheme.searchBar}
                 placeholder='Etsi vinkkejä'
                 onChangeText={(text) => setSearchQuery(text)}
                 value={searchQuery}
             />
 
-            <Text style={[Styles.h1, Styles.vali]}>Inspiraatiota ja vinkkejä</Text>
+            <Text style={[selectedTheme.h1, selectedTheme.vali]}>Inspiraatiota ja vinkkejä</Text>
             {filteredDiscovers.map((discover, index) => (
                 <View key={index}>
                     <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
                         <View>
                                     <TouchableOpacity onPress={() => handleDiscoverPress(discover)}>
-                                        <View style={Styles.TipsImageContainer}>
+                                        <View style={selectedTheme.TipsImageContainer}>
                                         <Image
                                             source={{ uri: discover.image }}
-                                            style={Styles.TipsImage}
+                                            style={selectedTheme.TipsImage}
                                         /></View>
                                     </TouchableOpacity>
-                                    <Text style={Styles.DiscoverH3}>{discover.title}</Text>
+                                    <Text style={selectedTheme.DiscoverH3}>{discover.title}</Text>
                                 </View>
                     </TouchableOpacity>
                 </View>

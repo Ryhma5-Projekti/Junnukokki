@@ -4,13 +4,15 @@ import { getData, getAllKeys } from "../util/LocalStorageUtil"
 import RecipeList from '../components/RecipeList';
 import RecipeSearch from '../components/RecipeSearch';
 import useRecipes from '../hooks/useRecipes';
-import Styles from '../styles/Styles';
+
+import { useTheme } from '../styles/ThemeContext';
 import RemoveRecipeModal from '../components/RemoveRecipeModal';
 import { useForceUpdate } from '../hooks/ForceUpdateProvider';
 
 export default function MyRecipes() {
     const { setRecipes, searchQuery, setSearchQuery, filteredRecipes, handleRecipePress } = useRecipes()
     const { forceUpdate } = useForceUpdate();
+    const { selectedTheme } = useTheme(); 
 
     useEffect(() => {
         (async () => {
@@ -51,7 +53,7 @@ export default function MyRecipes() {
     }
 
     return (
-        <View style={Styles.vali}>
+        <View style={selectedTheme.vali}>
             <RemoveRecipeModal toggleModal={toggleModal}
                 modalVisible={modalVisible}
                 recipe={selectedRecipe} />
@@ -63,3 +65,4 @@ export default function MyRecipes() {
         </View>
     );
 }
+
